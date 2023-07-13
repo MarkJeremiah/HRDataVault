@@ -10,12 +10,12 @@ import java.sql.*;
  *
  * @author MARK
  */
-public class Menu1 extends javax.swing.JInternalFrame {
+public class SummaryMenu extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Menu1
      */
-    public Menu1() {
+    public SummaryMenu() {
         initComponents();
         
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
@@ -26,10 +26,10 @@ public class Menu1 extends javax.swing.JInternalFrame {
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");
             
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");        
         Statement statement = connection.createStatement();
         System.out.print("Connected");
-        String countQuery = "SELECT COUNT(*) FROM Employee";
+        String countQuery = "SELECT COUNT(*) FROM employee_file";
 
         ResultSet resultSet1 = statement.executeQuery(countQuery);
 
@@ -38,7 +38,7 @@ public class Menu1 extends javax.swing.JInternalFrame {
         if (resultSet1.next()) {
             count_emp = resultSet1.getInt(1);
         }
-        String countQuery1 = "SELECT COUNT(DISTINCT Department) FROM Employee";
+        String countQuery1 = "SELECT COUNT(DISTINCT Department) FROM employee_file";
         ResultSet resultSet2 = statement.executeQuery(countQuery1);
         
         int count_dept = 0;
