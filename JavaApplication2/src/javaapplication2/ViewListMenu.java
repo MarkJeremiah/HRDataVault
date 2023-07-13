@@ -14,12 +14,12 @@ import javax.swing.table.TableRowSorter;
  *
  * @author MARK
  */
-public class Menu2 extends javax.swing.JInternalFrame {
+public class ViewListMenu extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Menu1
      */
-    public Menu2() {
+    public ViewListMenu() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI)this.getUI();
@@ -37,9 +37,9 @@ public class Menu2 extends javax.swing.JInternalFrame {
         
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");        
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
         System.out.print("Connected");
-        String query1= "SELECT * FROM employee";
+        String query1= "SELECT * FROM employee_file";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(query1);
         
