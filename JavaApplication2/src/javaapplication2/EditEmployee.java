@@ -37,9 +37,9 @@ public class EditEmployee extends javax.swing.JInternalFrame {
         
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");        
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
         System.out.print("Connected");
-        String query1= "SELECT * FROM employee";
+        String query1= "SELECT * FROM employee_file";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(query1);
         
@@ -192,7 +192,8 @@ public class EditEmployee extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        AddEmp pi = new AddEmp();
+        pi.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
