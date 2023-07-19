@@ -302,6 +302,12 @@ public class UpdateEmp extends javax.swing.JFrame {
         EmpNo.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
         EmpNo.setText("0000");
         jPanel1.add(EmpNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, 30));
+
+        EmpName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmpNameActionPerformed(evt);
+            }
+        });
         jPanel1.add(EmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 279, 30));
 
         jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -752,6 +758,10 @@ public class UpdateEmp extends javax.swing.JFrame {
             Widowed.setSelected(false);
         }
     }//GEN-LAST:event_SeperatedActionPerformed
+
+    private void EmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmpNameActionPerformed
 
     /**
      * @param args the command line arguments

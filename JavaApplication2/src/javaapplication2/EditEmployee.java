@@ -183,6 +183,11 @@ public class EditEmployee extends javax.swing.JInternalFrame {
                 jButton3MouseClicked(evt);
             }
         });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 190, 40));
 
         jPanel1.setBackground(new java.awt.Color(241, 239, 239));
@@ -222,6 +227,12 @@ public class EditEmployee extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null,"Please select a row in the Table");
     }
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        UpdateEmp pi = new UpdateEmp();
+        pi.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
