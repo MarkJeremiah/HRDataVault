@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.util.Date;
 
 
 /**
@@ -86,7 +87,6 @@ public class AddEmp extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         Label2 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel14 = new javax.swing.JLabel();
         QuitWNRadioButton = new javax.swing.JRadioButton();
         QuitWoNRadioButton = new javax.swing.JRadioButton();
@@ -101,6 +101,7 @@ public class AddEmp extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         jLabel7.setText("jLabel7");
 
@@ -321,14 +322,6 @@ public class AddEmp extends javax.swing.JFrame {
         Label2.setText("Add Employee");
         jPanel1.add(Label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 890, 140, 30));
-
         jLabel14.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel14.setText("Classification");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
@@ -443,6 +436,9 @@ public class AddEmp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 200, 30));
+
+        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 900, 140, -1));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -564,10 +560,6 @@ public class AddEmp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_NoCheckBoxActionPerformed
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -596,11 +588,14 @@ public class AddEmp extends javax.swing.JFrame {
             String tax;
             String classification;
             String maritalStat;
+            String TOE;
+            Date LastDateW=jDateChooser1.getDate();
+            String Eligibility;
             
             
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
-            PreparedStatement ps=con.prepareStatement("INSERT into employee_file(EmpNo,EmpName,Position,Department,PayRate,PR_Per,Bonus,TaxExempt,Classification,MaritalStatus,ContactNo)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement ps=con.prepareStatement("INSERT into employee_file(EmpNo,EmpName,Position,Department,PayRate,PR_Per,Bonus,TaxExempt,Classification,MaritalStatus,ContactNo,TOE,LDW,Eligibility)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setInt(1, empno);
             ps.setString(2, empname);
             ps.setString(3, position);
@@ -662,6 +657,51 @@ public class AddEmp extends javax.swing.JFrame {
                 System.out.println(maritalStat);
             }
             ps.setString(11, contactno);
+            // TOE Retrieval
+            if(QuitWNRadioButton.isSelected()){
+                TOE="QWN";
+                ps.setString(12, TOE);
+                System.out.println(TOE);
+            }
+            if(QuitWoNRadioButton.isSelected()){
+                TOE="QWON";
+                ps.setString(12, TOE);
+                System.out.println(TOE);
+            }
+            if(TerminatedRadioButton.isSelected()){
+                TOE="Terminated";
+                ps.setString(12, TOE);
+                System.out.println(TOE);
+            }
+            if(LaidOffRadioButton.isSelected()){
+                TOE="Laid Off";
+                ps.setString(12, TOE);
+                System.out.println(TOE);
+            }
+            if(EndOfAssRadioButton.isSelected()){
+                TOE="EOA";
+                ps.setString(12, TOE);
+                System.out.println(TOE);
+            }
+            // Convert java.util.Date to java.sql.Date 
+            if (LastDateW != null) { 
+                java.sql.Date sqlDate = new java.sql.Date(LastDateW.getTime()); 
+                System.out.println("Selected Date (java.sql.Date): " + sqlDate); 
+                ps.setDate(13, sqlDate);
+            } else { 
+                System.out.println("No date selected."); }
+
+            // Eligibility Retrieval
+            if(YesCheckBox.isSelected()){
+                Eligibility="Yes";
+                ps.setString(14, Eligibility);
+                System.out.println(Eligibility);
+            }
+            if(NoCheckBox.isSelected()){
+                Eligibility="No";
+                ps.setString(14, Eligibility);
+                System.out.println(Eligibility);
+            }
             ps.executeUpdate();
             JOptionPane.showMessageDialog(this, "Insert Successfully");
         } catch (ClassNotFoundException ex) {
@@ -805,7 +845,7 @@ public class AddEmp extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
