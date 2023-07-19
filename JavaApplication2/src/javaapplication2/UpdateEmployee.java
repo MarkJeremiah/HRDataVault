@@ -17,12 +17,10 @@ public class UpdateEmployee extends javax.swing.JFrame {
      * Creates new form AddEmployee
      */
    
-    public static UpdateEmployee Instance;
-    public JLabel lbl;
+    
     public UpdateEmployee() {
         initComponents();
-        Instance = this;
-        lbl = jLabel1;
+ 
     }
     
     public void setPassedString(String passedString) {

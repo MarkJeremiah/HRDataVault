@@ -213,8 +213,7 @@ public class EditEmployee extends javax.swing.JInternalFrame {
     if (selectedRow >= 0) {
         String selectedString = (String) EmployeeTable.getValueAt(selectedRow, 1);
         Integer empNO = (Integer) EmployeeTable.getValueAt(selectedRow, 0);
-        UpdateEmployee add = new UpdateEmployee();
-        add.setPassedString(selectedString);
+        UpdateEmp add = new UpdateEmp();
         add.setPassedInteger(empNO);
         add.setVisible(true);
     }
