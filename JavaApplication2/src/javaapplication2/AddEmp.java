@@ -10,6 +10,8 @@ import java.util.Random;
  *
  * @author MARK
  */
+
+
 public class AddEmp extends javax.swing.JFrame {
 
     /**
@@ -251,6 +253,11 @@ public class AddEmp extends javax.swing.JFrame {
 
         SingleRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         SingleRadioButton.setText("Single");
+        SingleRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SingleRadioButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(SingleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(102, 0, 102));
@@ -266,6 +273,11 @@ public class AddEmp extends javax.swing.JFrame {
 
         MarriedRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         MarriedRadioButton.setText("Married");
+        MarriedRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MarriedRadioButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(MarriedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, -1, -1));
 
         WidowedRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
@@ -479,14 +491,62 @@ public class AddEmp extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         
+        // Retrive Text
         String empname=jTextField1.getText();
         String position=jTextField2.getText();
         String department=jTextField3.getText();
         String payrate=jTextField5.getText();
         String per=jTextField4.getText();
         String bonus=jTextField6.getText();
+        String tax;
+        String classification;
+        String maritalStat;
+        // Tax Exemption Retrieval
+        if(ExemptCheckBox.isSelected()){
+            tax="Exempt";
+            System.out.println(tax);
+        }
+        if(NonExemptCheckBox.isSelected()){
+            tax="Non-Exempt";
+            System.out.println(tax);
+        }
+        // Classification Retrieval
+         if(IntroductoryCheckBox.isSelected()){
+            classification="Introductory";
+            System.out.println(classification);
+        }
+         if(RegCheckBox.isSelected()){
+            classification="Regular";
+            System.out.println(classification);
+        }
+         if(PTCheckBox.isSelected()){
+            classification="Part-Time";
+            System.out.println(classification);
+        }
+         if(TempCheckBox.isSelected()){
+            classification="Temporary";
+            System.out.println(classification);
+        }
+         // Marital Status Retrieval
+         if(SingleRadioButton.isSelected()){
+            maritalStat="Single";
+            System.out.println(maritalStat);
+        }
+         if(MarriedRadioButton.isSelected()){
+            maritalStat="Married";
+            System.out.println(maritalStat);
+        }
+         if(WidowedRadioButton.isSelected()){
+            maritalStat="Widowed";
+            System.out.println(maritalStat);
+        }
+         if(SeparatedRadioButton.isSelected()){
+            maritalStat="Separated";
+            System.out.println(maritalStat);
+        }
+ 
         
-        System.out.println(empname);
+        
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -509,6 +569,14 @@ public class AddEmp extends javax.swing.JFrame {
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void SingleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SingleRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SingleRadioButtonActionPerformed
+
+    private void MarriedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarriedRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarriedRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
