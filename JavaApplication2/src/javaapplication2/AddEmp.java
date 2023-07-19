@@ -88,14 +88,14 @@ public class AddEmp extends javax.swing.JFrame {
         Label2 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel14 = new javax.swing.JLabel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jRadioButton9 = new javax.swing.JRadioButton();
+        QuitWNRadioButton = new javax.swing.JRadioButton();
+        QuitWoNRadioButton = new javax.swing.JRadioButton();
+        EndOfAssRadioButton = new javax.swing.JRadioButton();
+        LaidOffRadioButton = new javax.swing.JRadioButton();
+        TerminatedRadioButton = new javax.swing.JRadioButton();
         jLabel15 = new javax.swing.JLabel();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
+        YesCheckBox = new javax.swing.JCheckBox();
+        NoCheckBox = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -125,7 +125,7 @@ public class AddEmp extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 540, 310));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 540, 260));
 
         EmpNo.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
         EmpNo.setText("0000");
@@ -182,9 +182,9 @@ public class AddEmp extends javax.swing.JFrame {
         });
         jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 90, 30));
 
-        Label1.setFont(new java.awt.Font("Poppins ExtraBold", 0, 14)); // NOI18N
-        Label1.setText("Termination of Employment");
-        jPanel1.add(Label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 820, -1, 30));
+        Label1.setFont(new java.awt.Font("Poppins ExtraBold", 1, 14)); // NOI18N
+        Label1.setText("Termination of Employment (Leave blank if not applicable)");
+        jPanel1.add(Label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 820, -1, 30));
 
         jLabel8.setText(".");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 970, 110, -1));
@@ -257,7 +257,7 @@ public class AddEmp extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel12.setText("Eligible For Rehire?");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 910, -1, 20));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 890, -1, 20));
 
         SeparatedRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         SeparatedRadioButton.setText("Seperated");
@@ -327,80 +327,85 @@ public class AddEmp extends javax.swing.JFrame {
                 jFormattedTextField1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 820, 140, 30));
+        jPanel1.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 890, 140, 30));
 
         jLabel14.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel14.setText("Classification");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
 
-        jRadioButton5.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        jRadioButton5.setText("Quit With Notice");
-        jRadioButton5.setBorder(null);
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+        QuitWNRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        QuitWNRadioButton.setText("Quit With Notice");
+        QuitWNRadioButton.setBorder(null);
+        QuitWNRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+                QuitWNRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 860, -1, -1));
+        jPanel1.add(QuitWNRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 860, -1, -1));
 
-        jRadioButton6.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        jRadioButton6.setText("Quit Without Notice");
-        jRadioButton6.setBorder(null);
-        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+        QuitWoNRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        QuitWoNRadioButton.setText("Quit Without Notice");
+        QuitWoNRadioButton.setBorder(null);
+        QuitWoNRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton6ActionPerformed(evt);
+                QuitWoNRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 860, -1, -1));
+        jPanel1.add(QuitWoNRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 860, -1, -1));
 
-        jRadioButton7.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        jRadioButton7.setText("End of Assignment");
-        jRadioButton7.setBorder(null);
-        jRadioButton7.addActionListener(new java.awt.event.ActionListener() {
+        EndOfAssRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        EndOfAssRadioButton.setText("End of Assignment");
+        EndOfAssRadioButton.setBorder(null);
+        EndOfAssRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton7ActionPerformed(evt);
+                EndOfAssRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 880, -1, 30));
+        jPanel1.add(EndOfAssRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 860, -1, 20));
 
-        jRadioButton8.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        jRadioButton8.setText("Laid Off");
-        jRadioButton8.setBorder(null);
-        jPanel1.add(jRadioButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 860, -1, -1));
-
-        jRadioButton9.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        jRadioButton9.setText("Terminated");
-        jRadioButton9.setBorder(null);
-        jRadioButton9.addActionListener(new java.awt.event.ActionListener() {
+        LaidOffRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        LaidOffRadioButton.setText("Laid Off");
+        LaidOffRadioButton.setBorder(null);
+        LaidOffRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton9ActionPerformed(evt);
+                LaidOffRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 860, -1, -1));
+        jPanel1.add(LaidOffRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 860, -1, -1));
+
+        TerminatedRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        TerminatedRadioButton.setText("Terminated");
+        TerminatedRadioButton.setBorder(null);
+        TerminatedRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TerminatedRadioButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(TerminatedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 860, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel15.setText("Last Date Worked");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 820, -1, 30));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 890, -1, 30));
 
-        jCheckBox7.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        jCheckBox7.setText("Yes");
-        jCheckBox7.setBorder(null);
-        jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
+        YesCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        YesCheckBox.setText("Yes");
+        YesCheckBox.setBorder(null);
+        YesCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox7ActionPerformed(evt);
+                YesCheckBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(jCheckBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 910, -1, 20));
+        jPanel1.add(YesCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 890, -1, 20));
 
-        jCheckBox8.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        jCheckBox8.setText("No");
-        jCheckBox8.setBorder(null);
-        jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
+        NoCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        NoCheckBox.setText("No");
+        NoCheckBox.setBorder(null);
+        NoCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox8ActionPerformed(evt);
+                NoCheckBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(jCheckBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 910, -1, 20));
+        jPanel1.add(NoCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 890, -1, 20));
 
         jButton2.setBackground(new java.awt.Color(102, 0, 102));
         jButton2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 12)); // NOI18N
@@ -449,7 +454,7 @@ public class AddEmp extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
         );
 
         pack();
@@ -471,63 +476,93 @@ public class AddEmp extends javax.swing.JFrame {
 
     private void IntroductoryCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntroductoryCheckBoxActionPerformed
         // TODO add your handling code here:
-    if(IntroductoryCheckBox.isSelected()){
-              PTCheckBox.setSelected(false);
-              RegCheckBox.setSelected(false);
-              TempCheckBox.setSelected(false);
+        if(IntroductoryCheckBox.isSelected()){
+               PTCheckBox.setSelected(false);
+               RegCheckBox.setSelected(false);
+               TempCheckBox.setSelected(false);
           }
     }//GEN-LAST:event_IntroductoryCheckBoxActionPerformed
 
     private void RegCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegCheckBoxActionPerformed
         // TODO add your handling code here:
-    if(RegCheckBox.isSelected()){
-              PTCheckBox.setSelected(false);
-              IntroductoryCheckBox.setSelected(false);
-              TempCheckBox.setSelected(false);
+        if(RegCheckBox.isSelected()){
+               PTCheckBox.setSelected(false);
+               IntroductoryCheckBox.setSelected(false);
+               TempCheckBox.setSelected(false);
           }
     }//GEN-LAST:event_RegCheckBoxActionPerformed
 
     private void PTCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PTCheckBoxActionPerformed
         // TODO add your handling code here:
-    if(PTCheckBox.isSelected()){
-              RegCheckBox.setSelected(false);
-              IntroductoryCheckBox.setSelected(false);
-              TempCheckBox.setSelected(false);
-          }
+        if(PTCheckBox.isSelected()){
+                RegCheckBox.setSelected(false);
+                IntroductoryCheckBox.setSelected(false);
+                TempCheckBox.setSelected(false);
+           }
     }//GEN-LAST:event_PTCheckBoxActionPerformed
 
     private void TempCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TempCheckBoxActionPerformed
         // TODO add your handling code here:
-    if(TempCheckBox.isSelected()){
+        if(TempCheckBox.isSelected()){
               RegCheckBox.setSelected(false);
               IntroductoryCheckBox.setSelected(false);
               PTCheckBox.setSelected(false);
           } 
     }//GEN-LAST:event_TempCheckBoxActionPerformed
 
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+    private void QuitWNRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitWNRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton5ActionPerformed
+        if(QuitWNRadioButton.isSelected()){
+            QuitWoNRadioButton.setSelected(false);
+            TerminatedRadioButton.setSelected(false);
+            LaidOffRadioButton.setSelected(false);
+            EndOfAssRadioButton.setSelected(false);
+        }
+    }//GEN-LAST:event_QuitWNRadioButtonActionPerformed
 
-    private void jRadioButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7ActionPerformed
+    private void EndOfAssRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EndOfAssRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton7ActionPerformed
+        if(EndOfAssRadioButton.isSelected()){
+            QuitWoNRadioButton.setSelected(false);
+            TerminatedRadioButton.setSelected(false);
+            LaidOffRadioButton.setSelected(false);
+            QuitWNRadioButton.setSelected(false);
+        }        
+    }//GEN-LAST:event_EndOfAssRadioButtonActionPerformed
 
-    private void jRadioButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton9ActionPerformed
+    private void TerminatedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerminatedRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton9ActionPerformed
+        if(TerminatedRadioButton.isSelected()){
+            QuitWoNRadioButton.setSelected(false);
+            EndOfAssRadioButton.setSelected(false);
+            LaidOffRadioButton.setSelected(false);
+            QuitWNRadioButton.setSelected(false);
+        }          
+    }//GEN-LAST:event_TerminatedRadioButtonActionPerformed
 
-    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
+    private void QuitWoNRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitWoNRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton6ActionPerformed
+        if(QuitWoNRadioButton.isSelected()){
+            QuitWNRadioButton.setSelected(false);
+            EndOfAssRadioButton.setSelected(false);
+            LaidOffRadioButton.setSelected(false);
+            TerminatedRadioButton.setSelected(false);
+        }         
+    }//GEN-LAST:event_QuitWoNRadioButtonActionPerformed
 
-    private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
+    private void YesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox7ActionPerformed
+        if(YesCheckBox.isSelected()){
+            NoCheckBox.setSelected(false);
+        }
+    }//GEN-LAST:event_YesCheckBoxActionPerformed
 
-    private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox8ActionPerformed
+    private void NoCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox8ActionPerformed
+        if(NoCheckBox.isSelected()){
+            YesCheckBox.setSelected(false);
+        }
+    }//GEN-LAST:event_NoCheckBoxActionPerformed
 
     private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
         // TODO add your handling code here:
@@ -701,6 +736,16 @@ public class AddEmp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_WidowedRadioButtonActionPerformed
 
+    private void LaidOffRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaidOffRadioButtonActionPerformed
+        // TODO add your handling code here:
+        if(LaidOffRadioButton.isSelected()){
+            QuitWoNRadioButton.setSelected(false);
+            EndOfAssRadioButton.setSelected(false);
+            TerminatedRadioButton.setSelected(false);
+            QuitWNRadioButton.setSelected(false);
+        }      
+    }//GEN-LAST:event_LaidOffRadioButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -738,23 +783,28 @@ public class AddEmp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel EmpNo;
+    private javax.swing.JRadioButton EndOfAssRadioButton;
     private javax.swing.JCheckBox ExemptCheckBox;
     private javax.swing.JCheckBox IntroductoryCheckBox;
     private javax.swing.JLabel Label1;
     private javax.swing.JLabel Label2;
+    private javax.swing.JRadioButton LaidOffRadioButton;
     private javax.swing.JRadioButton MarriedRadioButton;
+    private javax.swing.JCheckBox NoCheckBox;
     private javax.swing.JCheckBox NonExemptCheckBox;
     private javax.swing.JCheckBox PTCheckBox;
+    private javax.swing.JRadioButton QuitWNRadioButton;
+    private javax.swing.JRadioButton QuitWoNRadioButton;
     private javax.swing.JCheckBox RegCheckBox;
     private javax.swing.JRadioButton SeparatedRadioButton;
     private javax.swing.JRadioButton SingleRadioButton;
     private javax.swing.JCheckBox TempCheckBox;
+    private javax.swing.JRadioButton TerminatedRadioButton;
     private javax.swing.JRadioButton WidowedRadioButton;
+    private javax.swing.JCheckBox YesCheckBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -772,11 +822,6 @@ public class AddEmp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
