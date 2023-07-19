@@ -12,6 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -96,6 +99,8 @@ public class AddEmp extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
 
         jLabel7.setText("jLabel7");
 
@@ -120,7 +125,7 @@ public class AddEmp extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 540, 310));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 540, 310));
 
         EmpNo.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
         EmpNo.setText("0000");
@@ -212,7 +217,7 @@ public class AddEmp extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel11.setText("Marital Status");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, 20));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, 20));
 
         IntroductoryCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         IntroductoryCheckBox.setText("Introductory");
@@ -256,7 +261,12 @@ public class AddEmp extends javax.swing.JFrame {
 
         SeparatedRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         SeparatedRadioButton.setText("Seperated");
-        jPanel1.add(SeparatedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, -1, -1));
+        SeparatedRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeparatedRadioButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(SeparatedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, -1, -1));
 
         SingleRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         SingleRadioButton.setText("Single");
@@ -265,7 +275,7 @@ public class AddEmp extends javax.swing.JFrame {
                 SingleRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(SingleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, -1, -1));
+        jPanel1.add(SingleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(102, 0, 102));
         jButton1.setFont(new java.awt.Font("Poppins ExtraBold", 0, 12)); // NOI18N
@@ -285,22 +295,27 @@ public class AddEmp extends javax.swing.JFrame {
                 MarriedRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(MarriedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, -1, -1));
+        jPanel1.add(MarriedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, -1, -1));
 
         WidowedRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         WidowedRadioButton.setText("Widowed");
-        jPanel1.add(WidowedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, -1, -1));
+        WidowedRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WidowedRadioButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(WidowedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, -1, -1));
 
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 150, 30));
+        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 150, 30));
 
         jLabel13.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
-        jLabel13.setText("Bonus");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, 30));
+        jLabel13.setText("Contact Number");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, 30));
 
         Label2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 24)); // NOI18N
         Label2.setText("Add Employee");
@@ -396,7 +411,7 @@ public class AddEmp extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 180, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 180, 40));
 
         jLabel6.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
         jLabel6.setText("Employee Number:");
@@ -412,6 +427,17 @@ public class AddEmp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 120, 40));
+
+        jLabel16.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel16.setText("Bonus");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, 30));
+
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 200, 30));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -431,27 +457,52 @@ public class AddEmp extends javax.swing.JFrame {
 
     private void NonExemptCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NonExemptCheckBoxActionPerformed
         // TODO add your handling code here:
+        if(NonExemptCheckBox.isSelected()){
+            ExemptCheckBox.setSelected(false);
+        }
     }//GEN-LAST:event_NonExemptCheckBoxActionPerformed
 
     private void ExemptCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExemptCheckBoxActionPerformed
         // TODO add your handling code here:
-        
+        if(ExemptCheckBox.isSelected()){
+            NonExemptCheckBox.setSelected(false);
+        }   
     }//GEN-LAST:event_ExemptCheckBoxActionPerformed
 
     private void IntroductoryCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntroductoryCheckBoxActionPerformed
         // TODO add your handling code here:
+    if(IntroductoryCheckBox.isSelected()){
+              PTCheckBox.setSelected(false);
+              RegCheckBox.setSelected(false);
+              TempCheckBox.setSelected(false);
+          }
     }//GEN-LAST:event_IntroductoryCheckBoxActionPerformed
 
     private void RegCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegCheckBoxActionPerformed
         // TODO add your handling code here:
+    if(RegCheckBox.isSelected()){
+              PTCheckBox.setSelected(false);
+              IntroductoryCheckBox.setSelected(false);
+              TempCheckBox.setSelected(false);
+          }
     }//GEN-LAST:event_RegCheckBoxActionPerformed
 
     private void PTCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PTCheckBoxActionPerformed
         // TODO add your handling code here:
+    if(PTCheckBox.isSelected()){
+              RegCheckBox.setSelected(false);
+              IntroductoryCheckBox.setSelected(false);
+              TempCheckBox.setSelected(false);
+          }
     }//GEN-LAST:event_PTCheckBoxActionPerformed
 
     private void TempCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TempCheckBoxActionPerformed
         // TODO add your handling code here:
+    if(TempCheckBox.isSelected()){
+              RegCheckBox.setSelected(false);
+              IntroductoryCheckBox.setSelected(false);
+              PTCheckBox.setSelected(false);
+          } 
     }//GEN-LAST:event_TempCheckBoxActionPerformed
 
     private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
@@ -498,64 +549,89 @@ public class AddEmp extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             // TODO add your handling code here:
-            
             // Retrive Text
+            int empno = Integer.parseInt(EmpNo.getText()); 
             String empname=jTextField1.getText();
             String position=jTextField2.getText();
             String department=jTextField3.getText();
             String payrate=jTextField5.getText();
             String per=jTextField4.getText();
             String bonus=jTextField6.getText();
+            String contactno=jTextField7.getText();
             String tax;
             String classification;
             String maritalStat;
             
             
-            // Tax Exemption Retrieval
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
+            PreparedStatement ps=con.prepareStatement("INSERT into employee_file(EmpNo,EmpName,Position,Department,PayRate,PR_Per,Bonus,TaxExempt,Classification,MaritalStatus,ContactNo)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+            ps.setInt(1, empno);
+            ps.setString(2, empname);
+            ps.setString(3, position);
+            ps.setString(4, department);
+            ps.setString(5, payrate);
+            ps.setString(6, per);
+            ps.setString(7, bonus);
+             // Tax Exemption Retrieval
             if(ExemptCheckBox.isSelected()){
                 tax="Exempt";
+                ps.setString(8, tax);
                 System.out.println(tax);
             }
             if(NonExemptCheckBox.isSelected()){
                 tax="Non-Exempt";
+                ps.setString(8, tax);
                 System.out.println(tax);
             }
             // Classification Retrieval
             if(IntroductoryCheckBox.isSelected()){
                 classification="Introductory";
+                ps.setString(9, classification);
                 System.out.println(classification);
             }
             if(RegCheckBox.isSelected()){
                 classification="Regular";
+                ps.setString(9, classification);
                 System.out.println(classification);
             }
             if(PTCheckBox.isSelected()){
                 classification="Part-Time";
+                ps.setString(9, classification);
                 System.out.println(classification);
             }
             if(TempCheckBox.isSelected()){
                 classification="Temporary";
+                ps.setString(9, classification);
                 System.out.println(classification);
             }
             // Marital Status Retrieval
             if(SingleRadioButton.isSelected()){
                 maritalStat="Single";
+                ps.setString(10, maritalStat);
                 System.out.println(maritalStat);
             }
             if(MarriedRadioButton.isSelected()){
                 maritalStat="Married";
+                ps.setString(10, maritalStat);
                 System.out.println(maritalStat);
             }
             if(WidowedRadioButton.isSelected()){
                 maritalStat="Widowed";
+                ps.setString(10, maritalStat);
                 System.out.println(maritalStat);
             }
             if(SeparatedRadioButton.isSelected()){
                 maritalStat="Separated";
+                ps.setString(10, maritalStat);
                 System.out.println(maritalStat);
             }
-            Class.forName("com.mysql.jdbc.Driver");
+            ps.setString(11, contactno);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Insert Successfully");
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddEmp.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(AddEmp.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -587,11 +663,43 @@ public class AddEmp extends javax.swing.JFrame {
 
     private void SingleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SingleRadioButtonActionPerformed
         // TODO add your handling code here:
+      if(SingleRadioButton.isSelected()){
+            MarriedRadioButton.setSelected(false);
+            WidowedRadioButton.setSelected(false);
+            SeparatedRadioButton.setSelected(false);
+        }
     }//GEN-LAST:event_SingleRadioButtonActionPerformed
 
     private void MarriedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarriedRadioButtonActionPerformed
         // TODO add your handling code here:
+      if(MarriedRadioButton.isSelected()){
+            SingleRadioButton.setSelected(false);
+            WidowedRadioButton.setSelected(false);
+            SeparatedRadioButton.setSelected(false);
+        }
     }//GEN-LAST:event_MarriedRadioButtonActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void SeparatedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeparatedRadioButtonActionPerformed
+        // TODO add your handling code here:
+      if(SeparatedRadioButton.isSelected()){
+            SingleRadioButton.setSelected(false);
+            MarriedRadioButton.setSelected(false);
+            WidowedRadioButton.setSelected(false);
+        }
+    }//GEN-LAST:event_SeparatedRadioButtonActionPerformed
+
+    private void WidowedRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WidowedRadioButtonActionPerformed
+        // TODO add your handling code here:
+      if(WidowedRadioButton.isSelected()){
+            SingleRadioButton.setSelected(false);
+            MarriedRadioButton.setSelected(false);
+            SeparatedRadioButton.setSelected(false);
+        }
+    }//GEN-LAST:event_WidowedRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -654,6 +762,7 @@ public class AddEmp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -677,5 +786,6 @@ public class AddEmp extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }
