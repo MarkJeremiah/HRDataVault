@@ -5,6 +5,13 @@
 package javaapplication2;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -489,61 +496,69 @@ public class AddEmp extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        
-        // Retrive Text
-        String empname=jTextField1.getText();
-        String position=jTextField2.getText();
-        String department=jTextField3.getText();
-        String payrate=jTextField5.getText();
-        String per=jTextField4.getText();
-        String bonus=jTextField6.getText();
-        String tax;
-        String classification;
-        String maritalStat;
-        // Tax Exemption Retrieval
-        if(ExemptCheckBox.isSelected()){
-            tax="Exempt";
-            System.out.println(tax);
+        try {
+            // TODO add your handling code here:
+            
+            // Retrive Text
+            String empname=jTextField1.getText();
+            String position=jTextField2.getText();
+            String department=jTextField3.getText();
+            String payrate=jTextField5.getText();
+            String per=jTextField4.getText();
+            String bonus=jTextField6.getText();
+            String tax;
+            String classification;
+            String maritalStat;
+            
+            
+            // Tax Exemption Retrieval
+            if(ExemptCheckBox.isSelected()){
+                tax="Exempt";
+                System.out.println(tax);
+            }
+            if(NonExemptCheckBox.isSelected()){
+                tax="Non-Exempt";
+                System.out.println(tax);
+            }
+            // Classification Retrieval
+            if(IntroductoryCheckBox.isSelected()){
+                classification="Introductory";
+                System.out.println(classification);
+            }
+            if(RegCheckBox.isSelected()){
+                classification="Regular";
+                System.out.println(classification);
+            }
+            if(PTCheckBox.isSelected()){
+                classification="Part-Time";
+                System.out.println(classification);
+            }
+            if(TempCheckBox.isSelected()){
+                classification="Temporary";
+                System.out.println(classification);
+            }
+            // Marital Status Retrieval
+            if(SingleRadioButton.isSelected()){
+                maritalStat="Single";
+                System.out.println(maritalStat);
+            }
+            if(MarriedRadioButton.isSelected()){
+                maritalStat="Married";
+                System.out.println(maritalStat);
+            }
+            if(WidowedRadioButton.isSelected()){
+                maritalStat="Widowed";
+                System.out.println(maritalStat);
+            }
+            if(SeparatedRadioButton.isSelected()){
+                maritalStat="Separated";
+                System.out.println(maritalStat);
+            }
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddEmp.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(NonExemptCheckBox.isSelected()){
-            tax="Non-Exempt";
-            System.out.println(tax);
-        }
-        // Classification Retrieval
-         if(IntroductoryCheckBox.isSelected()){
-            classification="Introductory";
-            System.out.println(classification);
-        }
-         if(RegCheckBox.isSelected()){
-            classification="Regular";
-            System.out.println(classification);
-        }
-         if(PTCheckBox.isSelected()){
-            classification="Part-Time";
-            System.out.println(classification);
-        }
-         if(TempCheckBox.isSelected()){
-            classification="Temporary";
-            System.out.println(classification);
-        }
-         // Marital Status Retrieval
-         if(SingleRadioButton.isSelected()){
-            maritalStat="Single";
-            System.out.println(maritalStat);
-        }
-         if(MarriedRadioButton.isSelected()){
-            maritalStat="Married";
-            System.out.println(maritalStat);
-        }
-         if(WidowedRadioButton.isSelected()){
-            maritalStat="Widowed";
-            System.out.println(maritalStat);
-        }
-         if(SeparatedRadioButton.isSelected()){
-            maritalStat="Separated";
-            System.out.println(maritalStat);
-        }
+
  
         
         
