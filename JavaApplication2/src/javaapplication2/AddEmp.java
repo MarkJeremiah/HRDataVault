@@ -693,7 +693,8 @@ public class AddEmp extends javax.swing.JFrame {
                 java.sql.Date sqlDate = new java.sql.Date(LastDateW.getTime()); 
                 System.out.println("Selected Date (java.sql.Date): " + sqlDate); 
                 ps.setDate(13, sqlDate);
-            } else { 
+            } else {
+                ps.setNull(13, java.sql.Types.VARCHAR);
                 System.out.println("No date selected."); }
 
             // Eligibility Retrieval
@@ -702,10 +703,12 @@ public class AddEmp extends javax.swing.JFrame {
                 ps.setString(14, Eligibility);
                 System.out.println(Eligibility);
             }
-            if(NoCheckBox.isSelected()){
+            else if(NoCheckBox.isSelected()){
                 Eligibility="No";
                 ps.setString(14, Eligibility);
                 System.out.println(Eligibility);
+            }else{
+                ps.setNull(14, java.sql.Types.VARCHAR);
             }
             ps.executeUpdate();
             JOptionPane.showMessageDialog(this, "Insert Successfully");
