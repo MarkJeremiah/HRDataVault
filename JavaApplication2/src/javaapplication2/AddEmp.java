@@ -456,6 +456,7 @@ public class AddEmp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void NonExemptCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NonExemptCheckBoxActionPerformed
         // TODO add your handling code here:
         if(NonExemptCheckBox.isSelected()){
@@ -585,13 +586,14 @@ public class AddEmp extends javax.swing.JFrame {
             String per=jTextField4.getText();
             String bonus=jTextField6.getText();
             String contactno=jTextField7.getText();
-            String tax;
-            String classification;
-            String maritalStat;
+            String tax = null;
+            String classification = null;
+            String maritalStat = null;
             String TOE;
             Date LastDateW=jDateChooser1.getDate();
             String Eligibility;
             
+           
             
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
@@ -609,10 +611,12 @@ public class AddEmp extends javax.swing.JFrame {
                 ps.setString(8, tax);
                 System.out.println(tax);
             }
-            if(NonExemptCheckBox.isSelected()){
+            else if(NonExemptCheckBox.isSelected()){
                 tax="Non-Exempt";
                 ps.setString(8, tax);
                 System.out.println(tax);
+            }else{
+                ps.setNull(8, java.sql.Types.VARCHAR);
             }
             // Classification Retrieval
             if(IntroductoryCheckBox.isSelected()){
@@ -710,6 +714,12 @@ public class AddEmp extends javax.swing.JFrame {
             }else{
                 ps.setNull(14, java.sql.Types.VARCHAR);
             }
+            // Check if required attributes except TOE, LastDateW, and Eligibility are missing
+            if (empname.isEmpty() || position.isEmpty() || department.isEmpty() || payrate.isEmpty()
+                || per.isEmpty() || bonus.isEmpty() || contactno.isEmpty() || isNullorEmpty(tax) || isNullorEmpty(classification) || isNullorEmpty(maritalStat)) {
+                JOptionPane.showMessageDialog(this, "The following attributes are required: EmpName, Position, Department, PayRate, PR_Per, Bonus, and ContactNo.");
+                return; // Exit the method, so the SQL insert won't be executed
+           }
             ps.executeUpdate();
             JOptionPane.showMessageDialog(this, "Insert Successfully");
         } catch (ClassNotFoundException ex) {
@@ -881,4 +891,8 @@ public class AddEmp extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
+
+    private boolean isNullorEmpty(String str) {
+          return str == null || str.trim().isEmpty();
+    }
 }
