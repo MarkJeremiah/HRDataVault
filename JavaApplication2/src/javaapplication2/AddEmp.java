@@ -717,7 +717,7 @@ public class AddEmp extends javax.swing.JFrame {
             // Check if required attributes except TOE, LastDateW, and Eligibility are missing
             if (empname.isEmpty() || position.isEmpty() || department.isEmpty() || payrate.isEmpty()
                 || per.isEmpty() || bonus.isEmpty() || contactno.isEmpty() || isNullorEmpty(tax) || isNullorEmpty(classification) || isNullorEmpty(maritalStat)) {
-                JOptionPane.showMessageDialog(this, "All fields are required, except Termination of Employment. Please fill in all the mandatory fields to proceed.");
+                JOptionPane.showMessageDialog(this, "The following attributes are required: EmpName, Position, Department, PayRate, PR_Per, Bonus, and ContactNo.");
                 return; // Exit the method, so the SQL insert won't be executed
            }
             ps.executeUpdate();
