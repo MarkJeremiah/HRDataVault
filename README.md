@@ -1,3 +1,3 @@
 # HRDataVault
 
-AN EMPLOYEE FILE MAINTENANCE SYSTEM FOR CORPORATIONS
+An Employee File Maintenance System for Corporations
