@@ -12,7 +12,7 @@ class Employee {
     private int EmpNo, ContactNo, PayRate, Bonus;;
     private String EmpName, Position, Department, PR_Per, TaxExempt, Classification, MaritalStatus, TOE, LDW, Eligibility;
     
-    public Employee(int EmpNo, String EmpName, int ContactNo, String Position, String Department, int PayRate, String PR_Per, String TaxExempt, String Classification, String MaritalStatus, int Bonus, String TOE, String LDW, String Eligbility){
+    public Employee(int EmpNo, String EmpName, int ContactNo, String Position, String Department, int PayRate, String PR_Per, String TaxExempt, String Classification, String MaritalStatus, int Bonus, String TOE, String LDW, String eligibility){
         this.EmpNo = EmpNo;
         this.EmpName = EmpName;
         this.ContactNo = ContactNo;
@@ -26,7 +26,7 @@ class Employee {
         this.Bonus = (int) Bonus;
         this.TOE = TOE;
         this.LDW = LDW;
-        this.Eligibility = Eligibility;        
+        this.Eligibility = eligibility;        
     }
     
     public int getEmpNo(){
