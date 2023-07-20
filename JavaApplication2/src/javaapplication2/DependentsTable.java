@@ -34,16 +34,16 @@ public class DependentsTable extends javax.swing.JInternalFrame {
 
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");        
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
         System.out.print("Connected");
-        String query1= "SELECT * FROM dependents";
+        String query1= "SELECT * FROM dependent_file";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(query1);
         
         Dependents dependents;
         while(rs.next()){
-           dependents = new Dependents(rs.getString("Dep_SID"), rs.getInt("EmpNo"),rs.getString("Dep_Name"), rs.getString("Relationship"),
-                                        rs.getLong("Dep_Contact"), rs.getString("Dep_Birthday"),rs.getInt("Dep_Age"), rs.getString("Dep_Sex"));
+           dependents = new Dependents(rs.getString("DepSID"), rs.getInt("EmpNo"),rs.getString("Dep_Name"), rs.getString("Relationship"),
+                                        rs.getLong("Dep_Contact"), rs.getString("Birthday"),rs.getInt("Dep_Age"), rs.getString("Dep_Sex"));
            dependentList.add(dependents);
         }
      
