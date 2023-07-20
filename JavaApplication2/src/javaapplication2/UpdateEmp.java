@@ -31,7 +31,7 @@ public class UpdateEmp extends javax.swing.JFrame {
     public void fetchDataFromEmployee() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
 
             String retrieve = "SELECT * FROM Employee WHERE Empno=?";
             PreparedStatement statement = connection.prepareStatement(retrieve);

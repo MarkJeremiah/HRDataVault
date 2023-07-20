@@ -660,28 +660,33 @@ public class AddEmp extends javax.swing.JFrame {
             // TOE Retrieval
             if(QuitWNRadioButton.isSelected()){
                 TOE="QWN";
+                // add if statement because this is optional
                 ps.setString(12, TOE);
                 System.out.println(TOE);
             }
-            if(QuitWoNRadioButton.isSelected()){
+            else if(QuitWoNRadioButton.isSelected()){
                 TOE="QWON";
                 ps.setString(12, TOE);
                 System.out.println(TOE);
             }
-            if(TerminatedRadioButton.isSelected()){
+            else if(TerminatedRadioButton.isSelected()){
                 TOE="Terminated";
                 ps.setString(12, TOE);
                 System.out.println(TOE);
             }
-            if(LaidOffRadioButton.isSelected()){
+            else if(LaidOffRadioButton.isSelected()){
                 TOE="Laid Off";
                 ps.setString(12, TOE);
                 System.out.println(TOE);
             }
-            if(EndOfAssRadioButton.isSelected()){
+            else if(EndOfAssRadioButton.isSelected()){
                 TOE="EOA";
                 ps.setString(12, TOE);
                 System.out.println(TOE);
+            }else{
+                TOE = null;
+                ps.setNull(12, java.sql.Types.VARCHAR);
+                System.out.println("TOE is null");
             }
             // Convert java.util.Date to java.sql.Date 
             if (LastDateW != null) { 
