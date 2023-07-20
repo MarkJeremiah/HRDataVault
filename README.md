@@ -2,6 +2,7 @@
 <Insert Logo>
 
 An Employee File Maintenance System for Corporations
+
 This project is developed using Java programming language and MySQL as the database. It aims to provide an efficient and user-friendly solution for managing employee records and department information.
 
 Features:
