@@ -25,27 +25,26 @@ public class DependentsTable extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI)this.getUI();
         ui.setNorthPane(null);
-        display_employee();              
+        display_dependents();              
            
     }
     
-    public ArrayList<Employee> employeeList(){
-        ArrayList<Employee> employeeList = new ArrayList<>();
-        
+    public ArrayList<Dependents> dependentList(){
+        ArrayList<Dependents> dependentList = new ArrayList<>();
+
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");        
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
         System.out.print("Connected");
-        String query1= "SELECT * FROM employee_file";
+        String query1= "SELECT * FROM dependents";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(query1);
         
-        Employee employee;
+        Dependents dependents;
         while(rs.next()){
-           employee = new Employee(rs.getInt("EmpNo"), rs.getString("EmpName"), rs.getInt("ContactNo"), rs.getString("Position"), 
-                                        rs.getString("Department"), rs.getInt("PayRate"), rs.getString("PR_Per"), rs.getString("TaxExempt"),
-                                          rs.getString("Classification"), rs.getString("MaritalStatus"), rs.getInt("Bonus"), rs.getString("TOE"), rs.getString("LDW"), rs.getString("Eligibility"));
-           employeeList.add(employee);
+           dependents = new Dependents(rs.getString("Dep_SID"), rs.getInt("EmpNo"),rs.getString("Dep_Name"), rs.getString("Relationship"),
+                                        rs.getLong("Dep_Contact"), rs.getString("Dep_Birthday"),rs.getInt("Dep_Age"), rs.getString("Dep_Sex"));
+           dependentList.add(dependents);
         }
      
         
@@ -53,28 +52,24 @@ public class DependentsTable extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.print(e);
         }
-        return employeeList;
+        return dependentList;
     }
     
-    public void display_employee(){
-        ArrayList<Employee> list = employeeList();
-        DefaultTableModel model = (DefaultTableModel)EmployeeTable.getModel();
-        Object [] row = new Object [14];
+    public void display_dependents(){
+        ArrayList<Dependents>list = dependentList();
+        DefaultTableModel model = (DefaultTableModel)DependentsTable.getModel();
+        Object [] row = new Object [8];
         for(int i = 0; i<list.size(); i++){
-            row[0] = list.get(i).getEmpNo();
-            row[1] = list.get(i).getEmpName();
-            row[2] = list.get(i).getContactNo();
-            row[3] = list.get(i).getPosition();
-            row[4] = list.get(i).getDepartment();
-            row[5] = list.get(i).getPayRate();
-            row[6] = list.get(i).getPR_Per();
-            row[7] = list.get(i).getTaxExempt();
-            row[8] = list.get(i).getClassification();
-            row[9] = list.get(i).getMaritalStatus();
-            row[10] = list.get(i).getBonus();
-            row[11] = list.get(i).getTOE();
-            row[12] = list.get(i).getLDW();
-            row[13] = list.get(i).getEligibility();
+            row[0] = list.get(i).getDepSID();
+            row[1] = list.get(i).getEmpNo();
+            row[2] = list.get(i).getDepName();
+            row[3] = list.get(i).getRelationship();
+            row[4] = list.get(i).getContactNo();
+            row[5] = list.get(i).getDepBirthday();
+            row[6] = list.get(i).getDepAge();
+            row[7] = list.get(i).getDepSex();
+       
+  
             model.addRow(row);
             
         }
@@ -83,9 +78,9 @@ public class DependentsTable extends javax.swing.JInternalFrame {
     }
     
     public void search(String str){
-        DefaultTableModel model = (DefaultTableModel)EmployeeTable.getModel();
+        DefaultTableModel model = (DefaultTableModel)DependentsTable.getModel();
         TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(model);
-        EmployeeTable.setRowSorter(trs);
+        DependentsTable.setRowSorter(trs);
         trs.setRowFilter(RowFilter.regexFilter(str));
         
     }
@@ -100,7 +95,7 @@ public class DependentsTable extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        EmployeeTable = new javax.swing.JTable();
+        DependentsTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         Search = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -109,19 +104,19 @@ public class DependentsTable extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(850, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
+        DependentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "EmpNo", "EmpName", "Contact No", "Position", "Department", "PayRate", "PR_Per", "TaxExempt", "Classification", "MaritalStatus", "Bonus", "TOE", "LDW", "Eligibility"
+                "DepSID", "EmpNo", "Name", "Relationship", "ContactNo", "Birthday", "Age", "Sex"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -132,13 +127,13 @@ public class DependentsTable extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        EmployeeTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        EmployeeTable.setAutoscrolls(false);
-        EmployeeTable.setIntercellSpacing(new java.awt.Dimension(0, 2));
-        jScrollPane1.setViewportView(EmployeeTable);
-        if (EmployeeTable.getColumnModel().getColumnCount() > 0) {
-            EmployeeTable.getColumnModel().getColumn(1).setPreferredWidth(130);
-            EmployeeTable.getColumnModel().getColumn(8).setPreferredWidth(80);
+        DependentsTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        DependentsTable.setAutoscrolls(false);
+        DependentsTable.setIntercellSpacing(new java.awt.Dimension(0, 2));
+        jScrollPane1.setViewportView(DependentsTable);
+        if (DependentsTable.getColumnModel().getColumnCount() > 0) {
+            DependentsTable.getColumnModel().getColumn(0).setPreferredWidth(130);
+            DependentsTable.getColumnModel().getColumn(7).setPreferredWidth(80);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 730, 530));
@@ -177,7 +172,7 @@ public class DependentsTable extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable EmployeeTable;
+    private javax.swing.JTable DependentsTable;
     private javax.swing.JTextField Search;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
