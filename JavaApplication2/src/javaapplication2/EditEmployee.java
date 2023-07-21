@@ -104,8 +104,11 @@ public class EditEmployee extends javax.swing.JInternalFrame {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
-        String deleteEmployeeQuery = "DELETE FROM Employee WHERE EmpNo=?";
-            try (PreparedStatement deleteEmployeeStatement = connection.prepareStatement(deleteEmployeeQuery)) {
+        String deleteQuery = "DELETE Employee, Dependents " +
+                             "FROM Employee " +
+                             "LEFT JOIN Dependents ON Employee.EmpNo = Dependents.EmpNo " +
+                             "WHERE Employee.EmpNo=?";
+            try (PreparedStatement deleteEmployeeStatement = connection.prepareStatement(deleteQuery)) {
                 deleteEmployeeStatement.setInt(1, empNO);  
                 int rowsDeleted = deleteEmployeeStatement.executeUpdate();
                 if (rowsDeleted > 0) {
@@ -117,12 +120,7 @@ public class EditEmployee extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Error: Failed to delete employee");
                 }
             }
-        
-        String deleteDependentsQuery = "DELETE FROM Dependents WHERE EmpNo=?";
-            try (PreparedStatement deleteDependentsStatement = connection.prepareStatement(deleteDependentsQuery)) {
-                deleteDependentsStatement.setInt(1, empNO);
-                deleteDependentsStatement.executeUpdate();
-            }
+       
 
         // Execute the update query to delete the employee
 
@@ -132,6 +130,9 @@ public class EditEmployee extends javax.swing.JInternalFrame {
     }
     
 }
+
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -142,6 +143,9 @@ public class EditEmployee extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(241, 239, 239));
         setBorder(null);
@@ -227,6 +231,14 @@ public class EditEmployee extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(241, 239, 239));
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Poppins ExtraBold", 0, 24)); // NOI18N
+        jLabel3.setText("Edit Employee");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication2/EditEmp.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -236,7 +248,9 @@ public class EditEmployee extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-
+        AddEmp add = new AddEmp();
+        add.setVisible(true);
+   
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
@@ -262,15 +276,20 @@ public class EditEmployee extends javax.swing.JInternalFrame {
   int selectedRow = EmployeeTable.getSelectedRow();
     
     if (selectedRow >= 0) {
+         AddEmp a = new AddEmp();   
+         a.dispose();
+  
         String selectedString = (String) EmployeeTable.getValueAt(selectedRow, 1);
         Integer empNO = (Integer) EmployeeTable.getValueAt(selectedRow, 0);
         UpdateEmp add = new UpdateEmp();
         add.setPassedInteger(empNO);
         add.setVisible(true);
+        
     }
     else{
         JOptionPane.showMessageDialog(null,"Please select a row in the Table");
     }
+  
     }//GEN-LAST:event_jButton3MouseClicked
 
 
@@ -279,6 +298,9 @@ public class EditEmployee extends javax.swing.JInternalFrame {
     private javax.swing.JTable EmployeeTable;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

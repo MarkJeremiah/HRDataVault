@@ -26,10 +26,10 @@ public class Menu1 extends javax.swing.JInternalFrame {
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");
             
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
         Statement statement = connection.createStatement();
         System.out.print("Connected");
-        String countQuery = "SELECT COUNT(*) FROM employee_file";
+        String countQuery = "SELECT COUNT(*) FROM employee";
 
         ResultSet resultSet1 = statement.executeQuery(countQuery);
 
@@ -38,7 +38,7 @@ public class Menu1 extends javax.swing.JInternalFrame {
         if (resultSet1.next()) {
             count_emp = resultSet1.getInt(1);
         }
-        String countQuery1 = "SELECT COUNT(DISTINCT Department) FROM employee_file";
+        String countQuery1 = "SELECT COUNT(DISTINCT Department) FROM employee";
         ResultSet resultSet2 = statement.executeQuery(countQuery1);
         
         int count_dept = 0;

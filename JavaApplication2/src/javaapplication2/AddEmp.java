@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.util.Date;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -22,19 +24,24 @@ import java.util.Date;
  * @author MARK
  */
 
-
 public class AddEmp extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form AddEmp
      */
+  
+    
     public AddEmp() {
         initComponents();
         Random random = new Random();
         int employeeNo = random.nextInt(10) * 1000 + random.nextInt(10) * 100 + random.nextInt(10) * 10 + random.nextInt(10);
         System.out.println(employeeNo);
-        
         EmpNo.setText(String.valueOf(employeeNo)); //Inassign ko yung random integer sa text
+        
+       Random DepSID = new Random();
+       int deptsid = DepSID.nextInt(10) * 1000 + random.nextInt(10) * 100 + random.nextInt(10) * 10 + random.nextInt(10);
+       System.out.println(deptsid);
+       DeptSID.setText("D"+String.valueOf(deptsid));
         
        /* int no = Integer.parseInt(EmpNo.getText());
         System.out.print(no); 
@@ -43,6 +50,41 @@ public class AddEmp extends javax.swing.JFrame {
         */
     }
 
+    private void saveDataToSQL() throws ClassNotFoundException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
+
+            // Get data from JTable (Replace JTableDataModel with your JTable's data model)
+            DefaultTableModel tableModel = (DefaultTableModel) Dep.getModel();
+            int rowCount = tableModel.getRowCount();
+            int colCount = tableModel.getColumnCount();
+
+            // Construct and execute the SQL INSERT statement
+            String updateQuery = ("INSERT into dependents(Dep_SID,Dep_Name, Relationship,Dep_Contact,Dep_Age,Dep_Birthday,Dep_Sex, EmpNo)VALUES(?,?,?,?,?,?,?,?)");
+             PreparedStatement statement = connection.prepareStatement(updateQuery);
+
+           for (int row = 0; row < rowCount; row++) {
+                for (int col = 0; col < colCount; col++) {
+                    Object value = tableModel.getValueAt(row, col);
+                    statement.setObject(col + 1, value);
+                }
+                // Set the EmpNo value as well (assuming EmpNo is an Integer)
+                statement.setInt(colCount + 1, Integer.parseInt(EmpNo.getText()));
+                statement.executeUpdate();
+            }
+            // Close the connection and statement
+            statement.close();
+            connection.close();
+
+            // Update the status label with success message
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Update the status label with error message
+          
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,7 +98,7 @@ public class AddEmp extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Dep = new javax.swing.JTable();
         EmpNo = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -86,7 +128,6 @@ public class AddEmp extends javax.swing.JFrame {
         WidowedRadioButton = new javax.swing.JRadioButton();
         jTextField6 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        Label2 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         QuitWNRadioButton = new javax.swing.JRadioButton();
         QuitWoNRadioButton = new javax.swing.JRadioButton();
@@ -96,103 +137,129 @@ public class AddEmp extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         YesCheckBox = new javax.swing.JCheckBox();
         NoCheckBox = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton4 = new javax.swing.JButton();
+        DeptSID = new javax.swing.JLabel();
+        Name = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        Relationship = new javax.swing.JTextField();
+        Contact = new javax.swing.JLabel();
+        ContactNum = new javax.swing.JTextField();
+        Birthday = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        Male = new javax.swing.JRadioButton();
+        Female = new javax.swing.JRadioButton();
+        jLabel21 = new javax.swing.JLabel();
+        AGE = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        Label3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        Label2 = new javax.swing.JLabel();
 
         jLabel7.setText("jLabel7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jScrollPane2.setBorder(null);
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        jPanel1.setBackground(new java.awt.Color(241, 239, 239));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Dep.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "DepSID", "DepName", "Relationship", "ContactNo", "Age", "Birthday", "Sex"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+            };
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 540, 260));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(Dep);
 
-        EmpNo.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, 540, 260));
+
+        EmpNo.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
         EmpNo.setText("0000");
-        jPanel1.add(EmpNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, 30));
+        jPanel1.add(EmpNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, 30));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 279, 30));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 279, 30));
 
         jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel2.setText("Employee Name");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel3.setText("Position");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 279, 30));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 279, 30));
 
         jLabel4.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel4.setText("Department");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 279, 30));
+        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 279, 30));
 
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 90, 30));
+        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 90, 30));
 
         jLabel5.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel5.setText("Per");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
 
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 90, 30));
+        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 90, 30));
 
         Label1.setFont(new java.awt.Font("Poppins ExtraBold", 1, 14)); // NOI18N
-        Label1.setText("Termination of Employment (Leave blank if not applicable)");
-        jPanel1.add(Label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 820, -1, 30));
+        Label1.setText("(Leave blank if not applicable)");
+        jPanel1.add(Label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 760, 260, 30));
 
         jLabel8.setText(".");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 970, 110, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 1030, 110, -1));
 
         jLabel9.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel9.setText("Pay Rate");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, -1, -1));
 
         NonExemptCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         NonExemptCheckBox.setText("Non-Exempt");
@@ -201,7 +268,7 @@ public class AddEmp extends javax.swing.JFrame {
                 NonExemptCheckBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(NonExemptCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, 20));
+        jPanel1.add(NonExemptCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, -1, 20));
 
         ExemptCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         ExemptCheckBox.setText("Exempt");
@@ -210,15 +277,15 @@ public class AddEmp extends javax.swing.JFrame {
                 ExemptCheckBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(ExemptCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, -1, 20));
+        jPanel1.add(ExemptCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, -1, 20));
 
         jLabel10.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel10.setText("Tax Exemption");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel11.setText("Marital Status");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, 20));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, 20));
 
         IntroductoryCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         IntroductoryCheckBox.setText("Introductory");
@@ -227,7 +294,7 @@ public class AddEmp extends javax.swing.JFrame {
                 IntroductoryCheckBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(IntroductoryCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, -1, 20));
+        jPanel1.add(IntroductoryCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, 20));
 
         RegCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         RegCheckBox.setText("Regular Full Time");
@@ -236,7 +303,7 @@ public class AddEmp extends javax.swing.JFrame {
                 RegCheckBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(RegCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, -1, 20));
+        jPanel1.add(RegCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, -1, 20));
 
         PTCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         PTCheckBox.setText("Part-Time");
@@ -245,7 +312,7 @@ public class AddEmp extends javax.swing.JFrame {
                 PTCheckBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(PTCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, -1, 20));
+        jPanel1.add(PTCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, 20));
 
         TempCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         TempCheckBox.setText("Temporary");
@@ -254,11 +321,11 @@ public class AddEmp extends javax.swing.JFrame {
                 TempCheckBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(TempCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, -1, 20));
+        jPanel1.add(TempCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, -1, 20));
 
         jLabel12.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel12.setText("Eligible For Rehire?");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 890, -1, 20));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 1070, -1, 20));
 
         SeparatedRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         SeparatedRadioButton.setText("Seperated");
@@ -267,7 +334,7 @@ public class AddEmp extends javax.swing.JFrame {
                 SeparatedRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(SeparatedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, -1, -1));
+        jPanel1.add(SeparatedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 430, -1, -1));
 
         SingleRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         SingleRadioButton.setText("Single");
@@ -276,7 +343,7 @@ public class AddEmp extends javax.swing.JFrame {
                 SingleRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(SingleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, -1));
+        jPanel1.add(SingleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(102, 0, 102));
         jButton1.setFont(new java.awt.Font("Poppins ExtraBold", 0, 12)); // NOI18N
@@ -287,7 +354,7 @@ public class AddEmp extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 120, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 1140, 120, 40));
 
         MarriedRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         MarriedRadioButton.setText("Married");
@@ -296,7 +363,7 @@ public class AddEmp extends javax.swing.JFrame {
                 MarriedRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(MarriedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, -1, -1));
+        jPanel1.add(MarriedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, -1, -1));
 
         WidowedRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         WidowedRadioButton.setText("Widowed");
@@ -305,26 +372,22 @@ public class AddEmp extends javax.swing.JFrame {
                 WidowedRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(WidowedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, -1, -1));
+        jPanel1.add(WidowedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, -1, -1));
 
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 150, 30));
+        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 150, 30));
 
         jLabel13.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel13.setText("Contact Number");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, 30));
-
-        Label2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 24)); // NOI18N
-        Label2.setText("Add Employee");
-        jPanel1.add(Label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, 30));
 
         jLabel14.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel14.setText("Classification");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, -1, -1));
 
         QuitWNRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         QuitWNRadioButton.setText("Quit With Notice");
@@ -334,7 +397,7 @@ public class AddEmp extends javax.swing.JFrame {
                 QuitWNRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(QuitWNRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 860, -1, -1));
+        jPanel1.add(QuitWNRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 1040, -1, -1));
 
         QuitWoNRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         QuitWoNRadioButton.setText("Quit Without Notice");
@@ -344,7 +407,7 @@ public class AddEmp extends javax.swing.JFrame {
                 QuitWoNRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(QuitWoNRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 860, -1, -1));
+        jPanel1.add(QuitWoNRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 1040, -1, -1));
 
         EndOfAssRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         EndOfAssRadioButton.setText("End of Assignment");
@@ -354,7 +417,7 @@ public class AddEmp extends javax.swing.JFrame {
                 EndOfAssRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(EndOfAssRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 860, -1, 20));
+        jPanel1.add(EndOfAssRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 1040, -1, 20));
 
         LaidOffRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         LaidOffRadioButton.setText("Laid Off");
@@ -364,7 +427,7 @@ public class AddEmp extends javax.swing.JFrame {
                 LaidOffRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(LaidOffRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 860, -1, -1));
+        jPanel1.add(LaidOffRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 1040, -1, -1));
 
         TerminatedRadioButton.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         TerminatedRadioButton.setText("Terminated");
@@ -374,11 +437,11 @@ public class AddEmp extends javax.swing.JFrame {
                 TerminatedRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(TerminatedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 860, -1, -1));
+        jPanel1.add(TerminatedRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 1040, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel15.setText("Last Date Worked");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 890, -1, 30));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1070, -1, 30));
 
         YesCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         YesCheckBox.setText("Yes");
@@ -388,7 +451,7 @@ public class AddEmp extends javax.swing.JFrame {
                 YesCheckBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(YesCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 890, -1, 20));
+        jPanel1.add(YesCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 1070, -1, 20));
 
         NoCheckBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         NoCheckBox.setText("No");
@@ -398,47 +461,139 @@ public class AddEmp extends javax.swing.JFrame {
                 NoCheckBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(NoCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 890, -1, 20));
+        jPanel1.add(NoCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 1070, -1, 20));
 
-        jButton2.setBackground(new java.awt.Color(102, 0, 102));
-        jButton2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Add Dependents");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 180, 40));
-
-        jLabel6.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
         jLabel6.setText("Employee Number:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 30));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, 30));
 
         jButton3.setBackground(new java.awt.Color(102, 0, 102));
         jButton3.setFont(new java.awt.Font("Poppins ExtraBold", 0, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Add");
+        jButton3.setText("Save");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 120, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 1140, 120, 40));
 
         jLabel16.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel16.setText("Bonus");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, 30));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, -1, 30));
 
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 200, 30));
+        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 200, 30));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 1070, 140, -1));
 
-        jDateChooser1.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 900, 140, -1));
+        jButton4.setBackground(new java.awt.Color(102, 0, 102));
+        jButton4.setFont(new java.awt.Font("Poppins ExtraBold", 0, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Add Dependents");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 920, 160, 40));
+
+        DeptSID.setFont(new java.awt.Font("Poppins ExtraBold", 0, 14)); // NOI18N
+        DeptSID.setForeground(new java.awt.Color(153, 0, 153));
+        DeptSID.setText("D3245");
+        jPanel1.add(DeptSID, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 760, 110, 30));
+        jPanel1.add(Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 810, 250, 30));
+
+        jLabel17.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel17.setText("Name");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 790, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel18.setText("Relationship");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 850, -1, -1));
+        jPanel1.add(Relationship, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 870, 250, 30));
+
+        Contact.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        Contact.setText("Contact Number");
+        jPanel1.add(Contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 910, -1, -1));
+        jPanel1.add(ContactNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 930, 250, 30));
+        jPanel1.add(Birthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 870, 250, 30));
+
+        jLabel19.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel19.setText("Birthday");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 850, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel20.setText("Sex");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 810, -1, 30));
+
+        Male.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        Male.setText("Male");
+        Male.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MaleActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Male, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 810, -1, 30));
+
+        Female.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        Female.setText("Female");
+        Female.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FemaleActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Female, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 810, -1, 30));
+
+        jLabel21.setFont(new java.awt.Font("Poppins ExtraBold", 0, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(153, 0, 153));
+        jLabel21.setText("Dependent SID:");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 760, 140, 30));
+        jPanel1.add(AGE, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 810, 50, 30));
+
+        jLabel22.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel22.setText("Age");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 810, -1, 30));
+
+        Label3.setFont(new java.awt.Font("Poppins ExtraBold", 1, 14)); // NOI18N
+        Label3.setText("Termination of Employment (Leave blank if not applicable)");
+        jPanel1.add(Label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 1000, -1, 30));
+
+        jLabel1.setText(".");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 1220, 60, -1));
+
+        jPanel2.setBackground(new java.awt.Color(153, 0, 153));
+
+        Label2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 24)); // NOI18N
+        Label2.setForeground(new java.awt.Color(255, 255, 255));
+        Label2.setText("Add Employee");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(Label2)
+                .addContainerGap(427, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(Label2)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, -1));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -454,6 +609,7 @@ public class AddEmp extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -562,12 +718,8 @@ public class AddEmp extends javax.swing.JFrame {
     }//GEN-LAST:event_NoCheckBoxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -575,6 +727,12 @@ public class AddEmp extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            saveDataToSQL();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddEmp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         try {
             // TODO add your handling code here:
             // Retrive Text
@@ -596,8 +754,8 @@ public class AddEmp extends javax.swing.JFrame {
            
             
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
-            PreparedStatement ps=con.prepareStatement("INSERT into employee_file(EmpNo,EmpName,Position,Department,PayRate,PR_Per,Bonus,TaxExempt,Classification,MaritalStatus,ContactNo,TOE,LDW,Eligibility)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
+            PreparedStatement ps=con.prepareStatement("INSERT into employee(EmpNo,EmpName,Position,Department,PayRate,PR_Per,Bonus,TaxExempt,Classification,MaritalStatus,ContactNo,TOE,LDW,Eligibility)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setInt(1, empno);
             ps.setString(2, empname);
             ps.setString(3, position);
@@ -714,6 +872,7 @@ public class AddEmp extends javax.swing.JFrame {
             }else{
                 ps.setNull(14, java.sql.Types.VARCHAR);
             }
+  
             // Check if required attributes except TOE, LastDateW, and Eligibility are missing
             if (empname.isEmpty() || position.isEmpty() || department.isEmpty() || payrate.isEmpty()
                 || per.isEmpty() || bonus.isEmpty() || contactno.isEmpty() || isNullorEmpty(tax) || isNullorEmpty(classification) || isNullorEmpty(maritalStat)) {
@@ -722,12 +881,12 @@ public class AddEmp extends javax.swing.JFrame {
            }
             ps.executeUpdate();
             JOptionPane.showMessageDialog(this, "Insert Successfully");
+            this.dispose();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddEmp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AddEmp.class.getName()).log(Level.SEVERE, null, ex);
         }
-
  
         
         
@@ -804,6 +963,49 @@ public class AddEmp extends javax.swing.JFrame {
         }      
     }//GEN-LAST:event_LaidOffRadioButtonActionPerformed
 
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+       DefaultTableModel model = (DefaultTableModel) Dep.getModel();
+       String Sex="";
+       if(Male.isSelected()){
+            Sex = "Male";
+       }
+       else{
+           Sex = "Female";
+       }
+       model.addRow(new Object[]{DeptSID.getText(),Name.getText(),Relationship.getText(), ContactNum.getText(),AGE.getText(), Birthday.getText(),Sex});
+       
+       
+       Random random = new Random();
+       int deptsid = random.nextInt(10) * 1000 + random.nextInt(10) * 100 + random.nextInt(10) * 10 + random.nextInt(10);
+       System.out.println(deptsid);
+       DeptSID.setText("D"+String.valueOf(deptsid));
+       
+       Name.setText("");
+       Relationship.setText("");
+       ContactNum.setText("");
+       AGE.setText("");
+       Birthday.setText("");
+       Male.setSelected(false);
+       Female.setSelected(false);
+       
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void MaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleActionPerformed
+        if(Male.isSelected()){
+            Female.setSelected(false);
+        }
+    }//GEN-LAST:event_MaleActionPerformed
+
+    private void FemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemaleActionPerformed
+        if(Female.isSelected()){
+            Male.setSelected(false);
+        }
+    }//GEN-LAST:event_FemaleActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -840,20 +1042,31 @@ public class AddEmp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AGE;
+    private javax.swing.JTextField Birthday;
+    private javax.swing.JLabel Contact;
+    private javax.swing.JTextField ContactNum;
+    private javax.swing.JTable Dep;
+    private javax.swing.JLabel DeptSID;
     private javax.swing.JLabel EmpNo;
     private javax.swing.JRadioButton EndOfAssRadioButton;
     private javax.swing.JCheckBox ExemptCheckBox;
+    private javax.swing.JRadioButton Female;
     private javax.swing.JCheckBox IntroductoryCheckBox;
     private javax.swing.JLabel Label1;
     private javax.swing.JLabel Label2;
+    private javax.swing.JLabel Label3;
     private javax.swing.JRadioButton LaidOffRadioButton;
+    private javax.swing.JRadioButton Male;
     private javax.swing.JRadioButton MarriedRadioButton;
+    private javax.swing.JTextField Name;
     private javax.swing.JCheckBox NoCheckBox;
     private javax.swing.JCheckBox NonExemptCheckBox;
     private javax.swing.JCheckBox PTCheckBox;
     private javax.swing.JRadioButton QuitWNRadioButton;
     private javax.swing.JRadioButton QuitWoNRadioButton;
     private javax.swing.JCheckBox RegCheckBox;
+    private javax.swing.JTextField Relationship;
     private javax.swing.JRadioButton SeparatedRadioButton;
     private javax.swing.JRadioButton SingleRadioButton;
     private javax.swing.JCheckBox TempCheckBox;
@@ -861,9 +1074,10 @@ public class AddEmp extends javax.swing.JFrame {
     private javax.swing.JRadioButton WidowedRadioButton;
     private javax.swing.JCheckBox YesCheckBox;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -871,7 +1085,13 @@ public class AddEmp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -880,9 +1100,9 @@ public class AddEmp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
