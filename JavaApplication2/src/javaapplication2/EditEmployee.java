@@ -177,12 +177,19 @@ public class EditEmployee extends javax.swing.JInternalFrame {
             }
         });
         EmployeeTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        EmployeeTable.setAutoscrolls(false);
         EmployeeTable.setGridColor(new java.awt.Color(204, 204, 204));
         EmployeeTable.setIntercellSpacing(new java.awt.Dimension(0, 3));
         EmployeeTable.setSelectionBackground(new java.awt.Color(255, 51, 153));
         EmployeeTable.setShowHorizontalLines(true);
         jScrollPane2.setViewportView(EmployeeTable);
+        if (EmployeeTable.getColumnModel().getColumnCount() > 0) {
+            EmployeeTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+            EmployeeTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            EmployeeTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            EmployeeTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+            EmployeeTable.getColumnModel().getColumn(7).setPreferredWidth(100);
+            EmployeeTable.getColumnModel().getColumn(9).setPreferredWidth(100);
+        }
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 560, 480));
 

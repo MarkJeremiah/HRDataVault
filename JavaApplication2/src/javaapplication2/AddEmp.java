@@ -141,7 +141,6 @@ public class AddEmp extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton4 = new javax.swing.JButton();
         DeptSID = new javax.swing.JLabel();
         Name = new javax.swing.JTextField();
@@ -162,6 +161,7 @@ public class AddEmp extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Label2 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         jLabel7.setText("jLabel7");
 
@@ -488,7 +488,6 @@ public class AddEmp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 200, 30));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 1070, 140, -1));
 
         jButton4.setBackground(new java.awt.Color(102, 0, 102));
         jButton4.setFont(new java.awt.Font("Poppins ExtraBold", 0, 12)); // NOI18N
@@ -594,6 +593,7 @@ public class AddEmp extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 1070, 130, -1));
 
         jScrollPane2.setViewportView(jPanel1);
 

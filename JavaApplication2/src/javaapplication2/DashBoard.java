@@ -376,7 +376,7 @@ public class DashBoard extends javax.swing.JFrame {
     public static void main(String args[]) {
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");        
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "mYsT4nd4rdQu3rYL4ngu4g3");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
         Statement statement = connection.createStatement();
         //System.out.print("Connected");
         
