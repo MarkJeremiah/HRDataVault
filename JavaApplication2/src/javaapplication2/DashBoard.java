@@ -50,7 +50,7 @@ public class DashBoard extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel10.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Poppins", 0, 11)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("Dependents Table");
@@ -93,16 +93,18 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 0, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication2/icon.jpg"))); // NOI18N
         jLabel2.setText("Summary");
+        jLabel2.setIconTextGap(15);
 
         javax.swing.GroupLayout Menu1Layout = new javax.swing.GroupLayout(Menu1);
         Menu1.setLayout(Menu1Layout);
         Menu1Layout.setHorizontalGroup(
             Menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Menu1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         Menu1Layout.setVerticalGroup(
             Menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,16 +130,18 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Poppins SemiBold", 0, 11)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication2/icon.jpg"))); // NOI18N
         jLabel11.setText("View List");
+        jLabel11.setIconTextGap(15);
 
         javax.swing.GroupLayout Menu2Layout = new javax.swing.GroupLayout(Menu2);
         Menu2.setLayout(Menu2Layout);
         Menu2Layout.setHorizontalGroup(
             Menu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Menu2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addComponent(jLabel11)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         Menu2Layout.setVerticalGroup(
             Menu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +153,7 @@ public class DashBoard extends javax.swing.JFrame {
         getContentPane().add(Menu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 180, -1));
 
         jLabel9.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel9.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Poppins", 0, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("Employee Table");
@@ -159,7 +163,7 @@ public class DashBoard extends javax.swing.JFrame {
                 jLabel9MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 100, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 100, 20));
 
         Menu3.setBackground(new java.awt.Color(34, 32, 33));
         Menu3.setForeground(new java.awt.Color(153, 0, 153));
@@ -178,16 +182,18 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Poppins SemiBold", 0, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication2/icon.jpg"))); // NOI18N
         jLabel6.setText("Employee");
+        jLabel6.setIconTextGap(15);
 
         javax.swing.GroupLayout Menu3Layout = new javax.swing.GroupLayout(Menu3);
         Menu3.setLayout(Menu3Layout);
         Menu3Layout.setHorizontalGroup(
             Menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Menu3Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addComponent(jLabel6)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         Menu3Layout.setVerticalGroup(
             Menu3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,7 +219,9 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Poppins SemiBold", 0, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication2/icon.jpg"))); // NOI18N
         jLabel7.setText("Department");
+        jLabel7.setIconTextGap(15);
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel7MouseClicked(evt);
@@ -225,9 +233,9 @@ public class DashBoard extends javax.swing.JFrame {
         Menu4Layout.setHorizontalGroup(
             Menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Menu4Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addComponent(jLabel7)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         Menu4Layout.setVerticalGroup(
             Menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

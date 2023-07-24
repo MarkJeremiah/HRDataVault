@@ -447,14 +447,17 @@ public class UpdateEmp extends javax.swing.JFrame {
 
         jLabel7.setText("jLabel7");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(300, 45));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(653, 640));
         setResizable(false);
 
         jScrollPane2.setBorder(null);
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        jPanel1.setBackground(new java.awt.Color(241, 239, 239));
         jPanel1.setFocusable(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -822,7 +825,7 @@ public class UpdateEmp extends javax.swing.JFrame {
         });
         jPanel1.add(Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 460, 90, 30));
 
-        jPanel2.setBackground(new java.awt.Color(153, 0, 153));
+        jPanel2.setBackground(new java.awt.Color(31, 30, 30));
 
         Label2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 24)); // NOI18N
         Label2.setForeground(new java.awt.Color(255, 255, 255));
@@ -857,7 +860,7 @@ public class UpdateEmp extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
 
         pack();

@@ -146,12 +146,12 @@ public class EmployeeTable extends javax.swing.JInternalFrame {
             EmployeeTable.getColumnModel().getColumn(8).setPreferredWidth(80);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 730, 470));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 730, 480));
 
         jLabel1.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Search");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, -1, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, -1, 30));
 
         Search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,12 +163,12 @@ public class EmployeeTable extends javax.swing.JInternalFrame {
                 SearchKeyReleased(evt);
             }
         });
-        getContentPane().add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, 210, 30));
+        getContentPane().add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 210, 30));
 
         jLabel2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Employee Table");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication2/Emp_T.jpg"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 850, 710));

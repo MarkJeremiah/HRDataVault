@@ -569,7 +569,7 @@ public class AddEmp extends javax.swing.JFrame {
         jLabel1.setText(".");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 1220, 60, -1));
 
-        jPanel2.setBackground(new java.awt.Color(153, 0, 153));
+        jPanel2.setBackground(new java.awt.Color(34, 32, 32));
 
         Label2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 24)); // NOI18N
         Label2.setForeground(new java.awt.Color(255, 255, 255));
@@ -605,7 +605,7 @@ public class AddEmp extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
 
         pack();
@@ -727,12 +727,7 @@ public class AddEmp extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            saveDataToSQL();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AddEmp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+ 
         try {
             // TODO add your handling code here:
             // Retrive Text
@@ -872,14 +867,17 @@ public class AddEmp extends javax.swing.JFrame {
             }else{
                 ps.setNull(14, java.sql.Types.VARCHAR);
             }
-  
+            
             // Check if required attributes except TOE, LastDateW, and Eligibility are missing
             if (empname.isEmpty() || position.isEmpty() || department.isEmpty() || payrate.isEmpty()
                 || per.isEmpty() || bonus.isEmpty() || contactno.isEmpty() || isNullorEmpty(tax) || isNullorEmpty(classification) || isNullorEmpty(maritalStat)) {
-                JOptionPane.showMessageDialog(this, "The following attributes are required: EmpName, Position, Department, PayRate, PR_Per, Bonus, and ContactNo.");
+                JOptionPane.showMessageDialog(this, "Please fill out all the required attributes before submitting the form.");
                 return; // Exit the method, so the SQL insert won't be executed
            }
-            ps.executeUpdate();
+            else{
+                    saveDataToSQL();
+                    ps.executeUpdate();
+            }
             JOptionPane.showMessageDialog(this, "Insert Successfully");
             this.dispose();
         } catch (ClassNotFoundException ex) {
@@ -972,7 +970,16 @@ public class AddEmp extends javax.swing.JFrame {
        else{
            Sex = "Female";
        }
-       model.addRow(new Object[]{DeptSID.getText(),Name.getText(),Relationship.getText(), ContactNum.getText(),AGE.getText(), Birthday.getText(),Sex});
+       
+        Integer contactNum = null;
+        if (!Name.getText().isEmpty() && ContactNum.getText().isEmpty()) {
+             contactNum = null;
+        }
+       
+       
+       
+       
+       model.addRow(new Object[]{DeptSID.getText(),Name.getText(),Relationship.getText(), contactNum, AGE.getText(), Birthday.getText(),Sex});
        
        
        Random random = new Random();

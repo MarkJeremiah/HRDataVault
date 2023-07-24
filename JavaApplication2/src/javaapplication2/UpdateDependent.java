@@ -177,43 +177,45 @@ public class UpdateDependent extends javax.swing.JFrame {
         jLabel7.setText("jLabel7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jScrollPane2.setBorder(null);
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+        jPanel1.setBackground(new java.awt.Color(241, 239, 239));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        DeptSID.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
+        DeptSID.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
         DeptSID.setText("D3245");
-        jPanel1.add(DeptSID, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 110, 30));
-        jPanel1.add(Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 250, 30));
+        jPanel1.add(DeptSID, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 110, 30));
+        jPanel1.add(Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 250, 30));
 
         jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel2.setText("Name");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel3.setText("Relationship");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
-        jPanel1.add(Relationship, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 250, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
+        jPanel1.add(Relationship, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 250, 30));
 
         Contact.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         Contact.setText("Contact Number");
-        jPanel1.add(Contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
-        jPanel1.add(ContactNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 250, 30));
-        jPanel1.add(Birthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 250, 30));
+        jPanel1.add(Contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
+        jPanel1.add(ContactNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 250, 30));
+        jPanel1.add(Birthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 250, 30));
 
         jLabel8.setText(".");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, 110, -1));
 
         jLabel9.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel9.setText("Birthday");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel11.setText("Sex");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, 30));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, -1, 30));
 
         Male.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         Male.setText("Male");
@@ -222,7 +224,7 @@ public class UpdateDependent extends javax.swing.JFrame {
                 MaleActionPerformed(evt);
             }
         });
-        jPanel1.add(Male, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, -1, 30));
+        jPanel1.add(Male, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, -1, 30));
 
         Female.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         Female.setText("Female");
@@ -231,28 +233,29 @@ public class UpdateDependent extends javax.swing.JFrame {
                 FemaleActionPerformed(evt);
             }
         });
-        jPanel1.add(Female, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, -1, 30));
+        jPanel1.add(Female, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, -1, 30));
 
         Label2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 24)); // NOI18N
+        Label2.setForeground(new java.awt.Color(102, 0, 102));
         Label2.setText("Edit Dependent");
-        jPanel1.add(Label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        jPanel1.add(Label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
         jLabel6.setText("Employee ID:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, 30));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, 30));
 
-        jLabel16.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
         jLabel16.setText("Dependent SID:");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 140, 30));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 140, 30));
 
-        empNo.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
+        empNo.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
         empNo.setText("0000");
-        jPanel1.add(empNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, -1, 30));
-        jPanel1.add(AGE, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 50, 30));
+        jPanel1.add(empNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, -1, 30));
+        jPanel1.add(AGE, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 50, 30));
 
         jLabel17.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel17.setText("Age");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, 30));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, -1, 30));
 
         Save2.setBackground(new java.awt.Color(102, 0, 102));
         Save2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 12)); // NOI18N
@@ -284,7 +287,7 @@ public class UpdateDependent extends javax.swing.JFrame {
                 SaveActionPerformed(evt);
             }
         });
-        jPanel1.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 120, 40));
+        jPanel1.add(Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 120, 40));
 
         Cancel.setBackground(new java.awt.Color(102, 0, 102));
         Cancel.setFont(new java.awt.Font("Poppins ExtraBold", 0, 12)); // NOI18N
@@ -300,7 +303,7 @@ public class UpdateDependent extends javax.swing.JFrame {
                 CancelActionPerformed(evt);
             }
         });
-        jPanel1.add(Cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 120, 40));
+        jPanel1.add(Cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 120, 40));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -312,10 +315,11 @@ public class UpdateDependent extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Save2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save2MouseClicked
