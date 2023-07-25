@@ -41,6 +41,8 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         Menu4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -60,7 +62,7 @@ public class DashBoard extends javax.swing.JFrame {
                 jLabel10MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 130, 20));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 120, 20));
 
         jButton1.setBackground(new java.awt.Color(102, 0, 102));
         jButton1.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -95,6 +97,7 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication2/icon.jpg"))); // NOI18N
         jLabel2.setText("Summary");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.setIconTextGap(15);
 
         javax.swing.GroupLayout Menu1Layout = new javax.swing.GroupLayout(Menu1);
@@ -132,6 +135,7 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication2/icon.jpg"))); // NOI18N
         jLabel11.setText("View List");
+        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel11.setIconTextGap(15);
 
         javax.swing.GroupLayout Menu2Layout = new javax.swing.GroupLayout(Menu2);
@@ -163,7 +167,7 @@ public class DashBoard extends javax.swing.JFrame {
                 jLabel9MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 100, 20));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 100, 20));
 
         Menu3.setBackground(new java.awt.Color(34, 32, 33));
         Menu3.setForeground(new java.awt.Color(153, 0, 153));
@@ -184,6 +188,7 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication2/icon.jpg"))); // NOI18N
         jLabel6.setText("Employee");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.setIconTextGap(15);
 
         javax.swing.GroupLayout Menu3Layout = new javax.swing.GroupLayout(Menu3);
@@ -221,6 +226,7 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication2/icon.jpg"))); // NOI18N
         jLabel7.setText("Department");
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel7.setIconTextGap(15);
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -244,6 +250,35 @@ public class DashBoard extends javax.swing.JFrame {
 
         getContentPane().add(Menu4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
+        jPanel1.setBackground(new java.awt.Color(31, 30, 29));
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Poppins ExtraBold", 0, 10)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("H R  D A T A V A U L T");
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 120, 30));
+
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(856, 652));
         jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -260,7 +295,9 @@ public class DashBoard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       System.exit(0);
+        LogIn l = new LogIn();
+        l.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Menu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu1MousePressed
@@ -306,7 +343,7 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void Menu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu1MouseClicked
         // TODO add your handling code here:
-        Menu1 menu1=new Menu1();
+        Summary menu1=new Summary();
     
         jDesktopPane1.removeAll();
         jLabel3.setVisible(false);
@@ -337,7 +374,7 @@ public class DashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void Menu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu4MouseClicked
-       Menu4 menu4 = new Menu4();
+       Departments menu4 = new Departments();
 
         jDesktopPane1.removeAll();
         jLabel3.setVisible(false);
@@ -376,6 +413,12 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel9.setForeground(Color.MAGENTA);
         jLabel10.setForeground(Color.WHITE);
     }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        DashBoard dashboard = new DashBoard();
+        dashboard.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -437,8 +480,10 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

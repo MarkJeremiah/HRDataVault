@@ -101,7 +101,7 @@ public class UpdateEmp extends javax.swing.JFrame {
                 String name = resultSet.getString("Empname");
                 String position = resultSet.getString("Position");
                 String department = resultSet.getString("Department");
-                int contactnum = resultSet.getInt("ContactNo");
+                Long contactnum = resultSet.getLong("ContactNo");
                 int payrate = resultSet.getInt("PayRate");
                 String per = resultSet.getString("PR_Per");
                 String taxexempt = resultSet.getString("TaxExempt");
@@ -213,7 +213,7 @@ public class UpdateEmp extends javax.swing.JFrame {
                 String name = EmpName.getText();
                 String position = Position.getText();
                 String department = Department.getText();
-                int contactNum = Integer.parseInt(Contact.getText());
+                Long contactNum = Long.valueOf(Contact.getText());
                 String TaxExempt="";
                 int payrate = Integer.parseInt(PayRate.getText());
                 String per = Per.getText();
@@ -317,7 +317,7 @@ public class UpdateEmp extends javax.swing.JFrame {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, position);
             preparedStatement.setString(3, department);
-            preparedStatement.setInt(4, contactNum);
+            preparedStatement.setLong(4, contactNum);
             preparedStatement.setInt(5, payrate);
             preparedStatement.setString(6, per);
             preparedStatement.setString(7, TaxExempt);
@@ -1001,7 +1001,7 @@ int selectedRow = DependentsTable.getSelectedRow();
     }//GEN-LAST:event_SaveActionPerformed
 
     private void Save2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Save2MouseClicked
-    AddDependent add = new AddDependent();
+        AddDependent add = new AddDependent();
         add.setPassedInteger(Index);
         add.setVisible(true);
     }//GEN-LAST:event_Save2MouseClicked

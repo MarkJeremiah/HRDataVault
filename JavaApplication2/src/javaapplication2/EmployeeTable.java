@@ -43,7 +43,7 @@ public class EmployeeTable extends javax.swing.JInternalFrame {
         
         Employee employee;
         while(rs.next()){
-           employee = new Employee(rs.getInt("EmpNo"), rs.getString("EmpName"), rs.getInt("ContactNo"), rs.getString("Position"), 
+           employee = new Employee(rs.getInt("EmpNo"), rs.getString("EmpName"), rs.getLong("ContactNo"), rs.getString("Position"), 
                                         rs.getString("Department"), rs.getInt("PayRate"), rs.getString("PR_Per"), rs.getString("TaxExempt"),
                                           rs.getString("Classification"), rs.getString("MaritalStatus"), rs.getInt("Bonus"), rs.getString("TOE"), rs.getString("LDW"), rs.getString("Eligibility"));
            employeeList.add(employee);
@@ -111,6 +111,7 @@ public class EmployeeTable extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(856, 652));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EmployeeTable.setAutoCreateRowSorter(true);
         EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

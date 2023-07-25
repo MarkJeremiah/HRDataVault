@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.util.Date;
 import javax.swing.JTable;
@@ -149,7 +150,6 @@ public class AddEmp extends javax.swing.JFrame {
         Relationship = new javax.swing.JTextField();
         Contact = new javax.swing.JLabel();
         ContactNum = new javax.swing.JTextField();
-        Birthday = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         Male = new javax.swing.JRadioButton();
@@ -162,10 +162,11 @@ public class AddEmp extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         Label2 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         jLabel7.setText("jLabel7");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
         jScrollPane2.setBorder(null);
@@ -524,7 +525,6 @@ public class AddEmp extends javax.swing.JFrame {
         Contact.setText("Contact Number");
         jPanel1.add(Contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 910, -1, -1));
         jPanel1.add(ContactNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 930, 250, 30));
-        jPanel1.add(Birthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 870, 250, 30));
 
         jLabel19.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel19.setText("Birthday");
@@ -593,7 +593,8 @@ public class AddEmp extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 1070, 130, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 1070, 150, 30));
+        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 870, 250, 30));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -737,7 +738,7 @@ public class AddEmp extends javax.swing.JFrame {
             String department=jTextField3.getText();
             String payrate=jTextField5.getText();
             String per=jTextField4.getText();
-            String bonus=jTextField6.getText();
+            String bonus="";
             String contactno=jTextField7.getText();
             String tax = null;
             String classification = null;
@@ -757,6 +758,13 @@ public class AddEmp extends javax.swing.JFrame {
             ps.setString(4, department);
             ps.setString(5, payrate);
             ps.setString(6, per);
+            
+            if(jTextField6.getText().isEmpty()){
+                bonus = null;
+            }
+            else{
+                bonus = jTextField6.getText();
+            }
             ps.setString(7, bonus);
              // Tax Exemption Retrieval
             if(ExemptCheckBox.isSelected()){
@@ -870,16 +878,18 @@ public class AddEmp extends javax.swing.JFrame {
             
             // Check if required attributes except TOE, LastDateW, and Eligibility are missing
             if (empname.isEmpty() || position.isEmpty() || department.isEmpty() || payrate.isEmpty()
-                || per.isEmpty() || bonus.isEmpty() || contactno.isEmpty() || isNullorEmpty(tax) || isNullorEmpty(classification) || isNullorEmpty(maritalStat)) {
+                || per.isEmpty() || contactno.isEmpty() || isNullorEmpty(tax) || isNullorEmpty(classification) || isNullorEmpty(maritalStat)) {
                 JOptionPane.showMessageDialog(this, "Please fill out all the required attributes before submitting the form.");
                 return; // Exit the method, so the SQL insert won't be executed
            }
             else{
-                    saveDataToSQL();
+                  
                     ps.executeUpdate();
+                    saveDataToSQL();
+                    JOptionPane.showMessageDialog(this, "Insert Successfully");
+                    this.dispose();
             }
-            JOptionPane.showMessageDialog(this, "Insert Successfully");
-            this.dispose();
+          
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddEmp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -962,7 +972,25 @@ public class AddEmp extends javax.swing.JFrame {
     }//GEN-LAST:event_LaidOffRadioButtonActionPerformed
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-       DefaultTableModel model = (DefaultTableModel) Dep.getModel();
+        String sex="";
+        if(Male.isSelected()){
+            sex = "male";
+        }
+        else if(Female.isSelected()){
+            sex = "female";
+        }
+        else{
+            sex = null;
+        }
+        
+        
+       if(Name.getText().isEmpty()|| Relationship.getText().isEmpty()|| Relationship.getText().isEmpty()|| AGE.getText().isEmpty() || sex == null) {
+          JOptionPane.showMessageDialog(this, "Please fill out all the required attributes of the dependents");
+       }
+       
+       else{   
+      DefaultTableModel model = (DefaultTableModel) Dep.getModel();
+      
        String Sex="";
        if(Male.isSelected()){
             Sex = "Male";
@@ -975,11 +1003,10 @@ public class AddEmp extends javax.swing.JFrame {
         if (!Name.getText().isEmpty() && ContactNum.getText().isEmpty()) {
              contactNum = null;
         }
-       
-       
-       
-       
-       model.addRow(new Object[]{DeptSID.getText(),Name.getText(),Relationship.getText(), contactNum, AGE.getText(), Birthday.getText(),Sex});
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(jDateChooser2.getDate());
+        
+       model.addRow(new Object[]{DeptSID.getText(),Name.getText(),Relationship.getText(), contactNum, AGE.getText(), formattedDate,Sex});
        
        
        Random random = new Random();
@@ -991,9 +1018,11 @@ public class AddEmp extends javax.swing.JFrame {
        Relationship.setText("");
        ContactNum.setText("");
        AGE.setText("");
-       Birthday.setText("");
+       jDateChooser2.setDate(null);
        Male.setSelected(false);
        Female.setSelected(false);
+       }
+        
        
     }//GEN-LAST:event_jButton4MouseClicked
 
@@ -1050,7 +1079,6 @@ public class AddEmp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AGE;
-    private javax.swing.JTextField Birthday;
     private javax.swing.JLabel Contact;
     private javax.swing.JTextField ContactNum;
     private javax.swing.JTable Dep;
@@ -1084,6 +1112,7 @@ public class AddEmp extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

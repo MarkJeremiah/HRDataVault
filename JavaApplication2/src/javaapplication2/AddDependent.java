@@ -5,9 +5,11 @@
 package javaapplication2;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -54,14 +56,30 @@ public class AddDependent extends javax.swing.JFrame {
         PreparedStatement statement = connection.prepareStatement(updateQuery);
 
         // Set the parameters for the update statement
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(jDateChooser1.getDate());
         
         statement.setString(1, Name.getText());
         statement.setString(2, Relationship.getText());
-        statement.setLong(3, Long.parseLong(ContactNum.getText()));
-        statement.setString(4, Birthday.getText());
+        statement.setString(4, formattedDate);
         statement.setInt(5, Integer.parseInt(AGE.getText()));
+        
+            
+            Long num;
+            if (ContactNum.getText().isEmpty()) {
+                num = null;
+                statement.setNull(3, java.sql.Types.BIGINT); // Set the parameter as null in the prepared statement
+            } else {
+                try {
+                    num = Long.parseLong(ContactNum.getText());
+                    statement.setLong(3, num);
+                } catch (NumberFormatException e) {
       
-
+                    e.printStackTrace();
+                }
+            }
+        
+        
         // Get the selected sex from the radio buttons
         String sex = "";
         if (Male.isSelected()) {
@@ -111,7 +129,6 @@ public class AddDependent extends javax.swing.JFrame {
         Relationship = new javax.swing.JTextField();
         Contact = new javax.swing.JLabel();
         ContactNum = new javax.swing.JTextField();
-        Birthday = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         Male = new javax.swing.JRadioButton();
@@ -125,6 +142,7 @@ public class AddDependent extends javax.swing.JFrame {
         Save2 = new javax.swing.JButton();
         Save = new javax.swing.JButton();
         Cancel = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         jLabel7.setText("jLabel7");
 
@@ -158,7 +176,6 @@ public class AddDependent extends javax.swing.JFrame {
         Contact.setText("Contact Number");
         jPanel1.add(Contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
         jPanel1.add(ContactNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 250, 30));
-        jPanel1.add(Birthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 250, 30));
 
         jLabel9.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel9.setText("Birthday");
@@ -202,6 +219,12 @@ public class AddDependent extends javax.swing.JFrame {
         empNo.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
         empNo.setText("0000");
         jPanel1.add(empNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, -1, 30));
+
+        AGE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AGEActionPerformed(evt);
+            }
+        });
         jPanel1.add(AGE, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 50, 30));
 
         jLabel17.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -255,6 +278,7 @@ public class AddDependent extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 120, 40));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 250, 30));
 
         jScrollPane2.setViewportView(jPanel1);
 
@@ -282,8 +306,26 @@ public class AddDependent extends javax.swing.JFrame {
     }//GEN-LAST:event_Save2ActionPerformed
 
     private void SaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveMouseClicked
-        saveDataToDatabase();
-        this.dispose();
+        String sex="";
+        if(Male.isSelected()){
+            sex = "male";
+        }
+        else if(Female.isSelected()){
+            sex = "female";
+        }
+        else{
+            sex = null;
+        }
+        
+        
+        if(Name.getText().isEmpty()|| Relationship.getText().isEmpty()|| Relationship.getText().isEmpty()|| AGE.getText().isEmpty() || sex == null) {
+          JOptionPane.showMessageDialog(this, "Please fill out all the required attributes of the dependents");
+       }else{
+           saveDataToDatabase();
+           this.dispose(); 
+        }
+        
+     
     }//GEN-LAST:event_SaveMouseClicked
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
@@ -309,6 +351,10 @@ public class AddDependent extends javax.swing.JFrame {
             Male.setSelected(false);
         }
     }//GEN-LAST:event_FemaleActionPerformed
+
+    private void AGEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AGEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AGEActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,7 +400,6 @@ public class AddDependent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AGE;
-    private javax.swing.JTextField Birthday;
     private javax.swing.JButton Cancel;
     private javax.swing.JLabel Contact;
     private javax.swing.JTextField ContactNum;
@@ -367,6 +412,7 @@ public class AddDependent extends javax.swing.JFrame {
     private javax.swing.JButton Save;
     private javax.swing.JButton Save2;
     private javax.swing.JLabel empNo;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;

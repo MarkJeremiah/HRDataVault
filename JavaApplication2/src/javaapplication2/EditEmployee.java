@@ -11,9 +11,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author MARK
@@ -46,7 +48,7 @@ public class EditEmployee extends javax.swing.JInternalFrame {
         
         Employee employee;
         while(rs.next()){
-           employee = new Employee(rs.getInt("EmpNo"), rs.getString("EmpName"), rs.getInt("ContactNo"), rs.getString("Position"), 
+           employee = new Employee(rs.getInt("EmpNo"), rs.getString("EmpName"), rs.getLong("ContactNo"), rs.getString("Position"), 
                                         rs.getString("Department"), rs.getInt("PayRate"), rs.getString("PR_Per"), rs.getString("TaxExempt"),
                                           rs.getString("Classification"), rs.getString("MaritalStatus"), rs.getInt("Bonus"), rs.getString("TOE"), rs.getString("LDW"), rs.getString("Eligibility"));
            employeeList.add(employee);
@@ -100,23 +102,33 @@ public class EditEmployee extends javax.swing.JInternalFrame {
     display_employee();
     }
     
+    public void search(String str){
+        DefaultTableModel model = (DefaultTableModel)EmployeeTable.getModel();
+        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(model);
+        EmployeeTable.setRowSorter(trs);
+        trs.setRowFilter(RowFilter.regexFilter(str));
+        
+    }
+    
     private void deleteEmployee(int empNO) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hrdatavault", "root", "@forgotpassword123");
-        String deleteQuery = "DELETE Employee, Dependents " +
-                             "FROM Employee " +
-                             "LEFT JOIN Dependents ON Employee.EmpNo = Dependents.EmpNo " +
-                             "WHERE Employee.EmpNo=?";
-            try (PreparedStatement deleteEmployeeStatement = connection.prepareStatement(deleteQuery)) {
-                deleteEmployeeStatement.setInt(1, empNO);  
-                int rowsDeleted = deleteEmployeeStatement.executeUpdate();
-                if (rowsDeleted > 0) {
-                    
+            String deleteDependentsQuery = "DELETE FROM Dependents WHERE EmpNo = ?";
+                try (PreparedStatement deleteDependentsStmt = connection.prepareStatement(deleteDependentsQuery)) {
+                    deleteDependentsStmt.setInt(1,  empNO);
+                    int dependentsRowsDeleted = deleteDependentsStmt.executeUpdate();
+                }
+
+            // Delete from the "Employee" table
+            String deleteEmployeeQuery = "DELETE FROM Employee WHERE EmpNo = ?";
+            try (PreparedStatement deleteEmployeeStmt = connection.prepareStatement(deleteEmployeeQuery)) {
+                deleteEmployeeStmt.setInt(1,  empNO);
+                int employeeRowsDeleted = deleteEmployeeStmt.executeUpdate();
+                if (employeeRowsDeleted > 0) {
                     JOptionPane.showMessageDialog(null, "Employee deleted successfully");
                     refreshTable();
                 } else {
-                
                     JOptionPane.showMessageDialog(null, "Error: Failed to delete employee");
                 }
             }
@@ -137,6 +149,9 @@ public class EditEmployee extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Search = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        Refresh = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         EmployeeTable = new javax.swing.JTable();
         Delete = new javax.swing.JButton();
@@ -151,6 +166,39 @@ public class EditEmployee extends javax.swing.JInternalFrame {
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(856, 652));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchActionPerformed(evt);
+            }
+        });
+        Search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchKeyReleased(evt);
+            }
+        });
+        getContentPane().add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 210, 30));
+
+        jLabel4.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel4.setText("Search");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, -1, 30));
+
+        Refresh.setBackground(new java.awt.Color(102, 0, 102));
+        Refresh.setFont(new java.awt.Font("Poppins ExtraBold", 0, 12)); // NOI18N
+        Refresh.setForeground(new java.awt.Color(255, 255, 255));
+        Refresh.setText("Refresh");
+        Refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RefreshMouseClicked(evt);
+            }
+        });
+        Refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 90, 30));
 
         EmployeeTable.setAutoCreateRowSorter(true);
         EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -191,7 +239,7 @@ public class EditEmployee extends javax.swing.JInternalFrame {
             EmployeeTable.getColumnModel().getColumn(9).setPreferredWidth(100);
         }
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 560, 480));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 560, 480));
 
         Delete.setBackground(new java.awt.Color(51, 0, 51));
         Delete.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -207,7 +255,7 @@ public class EditEmployee extends javax.swing.JInternalFrame {
                 DeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(Delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 190, 40));
+        getContentPane().add(Delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 190, 40));
 
         jButton2.setBackground(new java.awt.Color(255, 0, 255));
         jButton2.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -223,7 +271,7 @@ public class EditEmployee extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 190, 40));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 190, 40));
 
         jButton3.setBackground(new java.awt.Color(153, 0, 153));
         jButton3.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -234,7 +282,7 @@ public class EditEmployee extends javax.swing.JInternalFrame {
                 jButton3MouseClicked(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 190, 40));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 190, 40));
 
         jPanel1.setBackground(new java.awt.Color(241, 239, 239));
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -299,15 +347,35 @@ public class EditEmployee extends javax.swing.JInternalFrame {
   
     }//GEN-LAST:event_jButton3MouseClicked
 
+    private void RefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RefreshMouseClicked
+        refreshTable();
+    }//GEN-LAST:event_RefreshMouseClicked
+
+    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RefreshActionPerformed
+
+    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchActionPerformed
+
+    private void SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchKeyReleased
+        String str  = Search.getText();
+        search(str);
+    }//GEN-LAST:event_SearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Delete;
     private javax.swing.JTable EmployeeTable;
+    private javax.swing.JButton Refresh;
+    private javax.swing.JTextField Search;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

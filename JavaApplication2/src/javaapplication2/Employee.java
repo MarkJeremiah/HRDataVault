@@ -9,10 +9,11 @@ package javaapplication2;
  * @author MARK
  */
 class Employee {
-    private int EmpNo, ContactNo, PayRate, Bonus;;
+    private int EmpNo, PayRate, Bonus;;
     private String EmpName, Position, Department, PR_Per, TaxExempt, Classification, MaritalStatus, TOE, LDW, Eligibility;
+    private Long ContactNo;
     
-    public Employee(int EmpNo, String EmpName, int ContactNo, String Position, String Department, int PayRate, String PR_Per, String TaxExempt, String Classification, String MaritalStatus, int Bonus, String TOE, String LDW, String eligibility){
+    public Employee(int EmpNo, String EmpName, Long ContactNo, String Position, String Department, int PayRate, String PR_Per, String TaxExempt, String Classification, String MaritalStatus, int Bonus, String TOE, String LDW, String eligibility){
         this.EmpNo = EmpNo;
         this.EmpName = EmpName;
         this.ContactNo = ContactNo;
@@ -35,7 +36,7 @@ class Employee {
     public String getEmpName(){
         return EmpName;
     }
-    public int getContactNo(){
+    public Long getContactNo(){
         return ContactNo;
     }
     public String getPosition(){
